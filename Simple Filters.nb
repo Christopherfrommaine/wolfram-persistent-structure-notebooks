@@ -1,0 +1,3161 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[    144650,       3153]
+NotebookOptionsPosition[    142589,       3112]
+NotebookOutlinePosition[    143011,       3129]
+CellTagsIndexPosition[    142968,       3126]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+filter for die-out
+filter for simple periods
+\
+\>", "Text",
+ CellChangeTimes->{{3.989587921396812*^9, 
+  3.989587932373137*^9}},ExpressionUUID->"c0d4cb32-6a43-4b49-bd89-\
+aa64641cf186"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"GenerateFilter1", "[", 
+   RowBox[{"steps_Integer", ":", "100"}], "]"}], ":=", "\[IndentingNewLine]", 
+  
+  RowBox[{"FunctionCompile", "[", 
+   RowBox[{
+    RowBox[{"Function", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Typed", "[", 
+       RowBox[{"n", ",", " ", "\"\<UnsignedInteger64\>\""}], "]"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"count", "=", "0"}], ",", " ", 
+          RowBox[{"o", "=", "n"}]}], "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"While", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"o", "!=", "0"}], "&&", 
+            RowBox[{
+             RowBox[{"BitAnd", "[", 
+              RowBox[{"o", ",", " ", 
+               RowBox[{"TypeHint", "[", 
+                RowBox[{
+                "17293822569102704640", ",", 
+                 " ", "\"\<UnsignedInteger64\>\""}], "]"}]}], "]"}], "==", 
+             "0"}], "&&", 
+            RowBox[{"count", "<", "steps"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"count", "++"}], ";", "\[IndentingNewLine]", 
+            RowBox[{"o", "=", 
+             RowBox[{"TypeHint", "[", 
+              RowBox[{
+               RowBox[{"With", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"a", "=", 
+                    RowBox[{"BitShiftLeft", "[", 
+                    RowBox[{"o", ",", " ", "3"}], "]"}]}], ",", " ", 
+                   RowBox[{"b", "=", 
+                    RowBox[{"BitShiftLeft", "[", 
+                    RowBox[{"o", ",", " ", "2"}], "]"}]}], ",", " ", 
+                   RowBox[{"c", "=", 
+                    RowBox[{"BitShiftLeft", "[", 
+                    RowBox[{"o", ",", " ", "1"}], "]"}]}], ",", " ", 
+                   RowBox[{"d", "=", 
+                    RowBox[{"BitShiftRight", "[", 
+                    RowBox[{"o", ",", " ", "1"}], "]"}]}]}], "}"}], ",", 
+                 RowBox[{"BitXor", "[", 
+                  RowBox[{
+                   RowBox[{"BitXor", "[", 
+                    RowBox[{
+                    "a", ",", " ", "b", ",", " ", "c", ",", " ", "d", ",", 
+                    " ", "o"}], "]"}], ",", " ", 
+                   RowBox[{"BitOr", "[", 
+                    RowBox[{
+                    "a", ",", " ", "b", ",", " ", "c", ",", " ", "d", ",", 
+                    " ", "o"}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+                "]"}], ",", " ", "\"\<UnsignedInteger64\>\""}], "]"}]}], 
+            ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+         RowBox[{"o", "!=", "0"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ",", " ", 
+    RowBox[{"CompilerOptions", "->", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\"\<LLVMOptimization\>\"", "->", 
+        RowBox[{"\"\<ClangOptimization\>\"", "[", "3", "]"}]}], ",", " ", 
+       RowBox[{"\"\<AbortHandling\>\"", "->", "False"}], ",", " ", 
+       RowBox[{"\"\<OptimizationLevel\>\"", "->", "3"}], ",", 
+       RowBox[{"\"\<InvocationMode\>\"", "->", "\"\<Standalone\>\""}]}], 
+      "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.9895878805322647`*^9, 3.989587888196011*^9}, {
+   3.989588010749443*^9, 3.98958854335461*^9}, {3.989588576986622*^9, 
+   3.989588639839079*^9}, {3.989588714166005*^9, 3.989589001794065*^9}, {
+   3.989589276346994*^9, 3.98958947681382*^9}, 3.9895895314506607`*^9, {
+   3.989589583834015*^9, 3.98958958671821*^9}, {3.989662491582478*^9, 
+   3.989662516616527*^9}, {3.989662550395516*^9, 3.989662573318597*^9}, {
+   3.989662603970702*^9, 3.989662660307322*^9}, {3.989662702429942*^9, 
+   3.98966273248485*^9}, {3.9896627851998158`*^9, 3.989662874265938*^9}, {
+   3.98966335899675*^9, 3.9896634191935368`*^9}},
+ CellLabel->
+  "In[136]:=",ExpressionUUID->"94b6ce18-3d54-49c9-8f07-b8802676d666"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Filter1", "=", 
+   RowBox[{"GenerateFilter1", "[", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Timing", "[", 
+  RowBox[{"1.", "-", 
+   RowBox[{"Mean", "[", 
+    RowBox[{"Boole", "[", 
+     RowBox[{"ParallelMap", "[", 
+      RowBox[{"Filter1", ",", " ", 
+       RowBox[{"Range", "[", "1000000", "]"}]}], "]"}], "]"}], "]"}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.989662530457975*^9, 3.989662532413827*^9}, {
+  3.989662924290595*^9, 3.9896629246020813`*^9}, {3.989662990446288*^9, 
+  3.989662994826085*^9}, {3.9896634319287577`*^9, 3.9896634989015837`*^9}},
+ CellLabel->
+  "In[177]:=",ExpressionUUID->"3973df75-464e-4908-b9a4-9d6b5443246a"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.525259`", ",", "0.822603`"}], "}"}]], "Output",
+ CellChangeTimes->{{3.9896634660921593`*^9, 3.989663500247959*^9}, 
+   3.989666938332437*^9, 3.989667101870246*^9},
+ CellLabel->
+  "Out[178]=",ExpressionUUID->"9ceb610c-2193-40e0-aa50-ce500f7728ba"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Select", "[", 
+  RowBox[{
+   RowBox[{"Range", "[", "200", "]"}], ",", " ", "Filter1"}], "]"}]], "Input",\
+
+ CellChangeTimes->{{3.9896670854681787`*^9, 3.9896671064060698`*^9}},
+ CellLabel->
+  "In[179]:=",ExpressionUUID->"76ebd601-2832-415d-aa35-beb133905351"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"151", ",", "187", ",", "189", ",", "191", ",", "195"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{{3.989667090784911*^9, 3.989667107076789*^9}},
+ CellLabel->
+  "Out[179]=",ExpressionUUID->"0dfae359-6514-4ba3-b28f-b393cab97644"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"GenerateFilter2", "[", 
+   RowBox[{
+    RowBox[{"periodsToIgnore_List", ":", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", " ", "2", ",", " ", "9", ",", " ", "22"}], "}"}]}], ",",
+     " ", 
+    RowBox[{"maxSteps_", ":", "100"}]}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"FunctionCompile", "[", 
+   RowBox[{
+    RowBox[{"Function", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Typed", "[", 
+       RowBox[{"n", ",", " ", "\"\<UnsignedInteger64\>\""}], "]"}], ","}], 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}], ",", " ", 
+    RowBox[{"CompilerOptions", "->", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\"\<LLVMOptimization\>\"", "->", 
+        RowBox[{"\"\<ClangOptimization\>\"", "[", "3", "]"}]}], ",", " ", 
+       RowBox[{"\"\<AbortHandling\>\"", "->", "False"}], ",", " ", 
+       RowBox[{"\"\<OptimizationLevel\>\"", "->", "3"}], ",", 
+       RowBox[{"\"\<InvocationMode\>\"", "->", "\"\<Standalone\>\""}]}], 
+      "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.9895878805322647`*^9, 3.989587888196011*^9}, {
+   3.989588010749443*^9, 3.98958854335461*^9}, {3.989588576986622*^9, 
+   3.989588639839079*^9}, {3.989588714166005*^9, 3.989589001794065*^9}, 
+   3.989589056907642*^9, {3.989589145914424*^9, 3.989589214222747*^9}, 
+   3.9896697540150414`*^9},ExpressionUUID->"382a1460-22c8-4050-8f4d-\
+43e189cab34f"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{
+  3.9896697368091183`*^9},ExpressionUUID->"1747cfbf-bd76-44d4-90b1-\
+9a7470c17b3f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"GenerateFilter2", "[", 
+   RowBox[{
+    RowBox[{"periodsToIgnore_List", ":", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", " ", "2", ",", " ", "9", ",", " ", "22"}], "}"}]}], ",",
+     " ", 
+    RowBox[{"initSteps_", ":", "200"}]}], "]"}], ":=", "\[IndentingNewLine]", 
+  
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"maxPeriod", "=", 
+      RowBox[{"2", 
+       RowBox[{"Max", "[", "periodsToIgnore", "]"}]}]}], "}"}], ",", 
+    RowBox[{"FunctionCompile", "[", 
+     RowBox[{
+      RowBox[{"Function", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Typed", "[", 
+         RowBox[{"n", ",", " ", "\"\<UnsignedInteger64\>\""}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"o", "=", "n"}], ",", " ", "count", ",", " ", "accum"}], 
+           "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"count", "=", "0"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"While", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"o", "!=", "0"}], "&&", 
+              RowBox[{"count", "<", "initSteps"}], "&&", 
+              RowBox[{
+               RowBox[{"BitAnd", "[", 
+                RowBox[{"o", ",", " ", 
+                 RowBox[{"TypeHint", "[", 
+                  RowBox[{
+                  "16140901064495857664", ",", 
+                   " ", "\"\<UnsignedInteger64\>\""}], "]"}]}], "]"}], "==", 
+               "0"}]}], ",", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"count", "++"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{"EvenQ", "[", "o", "]"}], ",", " ", 
+                RowBox[{"o", "=", 
+                 RowBox[{"BitShiftRight", "[", "o", "]"}]}]}], "]"}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"o", "=", 
+               RowBox[{"With", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"a", "=", 
+                    RowBox[{"BitShiftLeft", "[", 
+                    RowBox[{"o", ",", " ", "3"}], "]"}]}], ",", " ", 
+                   RowBox[{"b", "=", 
+                    RowBox[{"BitShiftLeft", "[", 
+                    RowBox[{"o", ",", " ", "2"}], "]"}]}], ",", " ", 
+                   RowBox[{"c", "=", 
+                    RowBox[{"BitShiftLeft", "[", 
+                    RowBox[{"o", ",", " ", "1"}], "]"}]}], ",", " ", 
+                   RowBox[{"d", "=", 
+                    RowBox[{"BitShiftRight", "[", 
+                    RowBox[{"o", ",", " ", "1"}], "]"}]}]}], "}"}], ",", 
+                 RowBox[{"BitXor", "[", 
+                  RowBox[{
+                   RowBox[{"BitXor", "[", 
+                    RowBox[{
+                    "a", ",", " ", "b", ",", " ", "c", ",", " ", "d", ",", 
+                    " ", "o"}], "]"}], ",", " ", 
+                   RowBox[{"BitOr", "[", 
+                    RowBox[{
+                    "a", ",", " ", "b", ",", " ", "c", ",", " ", "d", ",", 
+                    " ", "o"}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+                "]"}]}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"While", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"EvenQ", "[", "o", "]"}], "&&", 
+              RowBox[{"o", "!=", "0"}]}], ",", " ", 
+             RowBox[{"o", "=", 
+              RowBox[{"BitShiftRight", "[", "o", "]"}]}]}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"count", "=", "0"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"accum", "=", "o"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"While", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"o", "!=", "0"}], "&&", 
+              RowBox[{"accum", "!=", "0"}], "&&", 
+              RowBox[{"count", "<=", "maxPeriod"}], "&&", 
+              RowBox[{
+               RowBox[{"BitAnd", "[", 
+                RowBox[{"o", ",", " ", 
+                 RowBox[{"TypeHint", "[", 
+                  RowBox[{
+                  "16140901064495857664", ",", 
+                   " ", "\"\<UnsignedInteger64\>\""}], "]"}]}], "]"}], "==", 
+               "0"}]}], ",", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"count", "++"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"o", "=", 
+               RowBox[{"With", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"a", "=", 
+                    RowBox[{"BitShiftLeft", "[", 
+                    RowBox[{"o", ",", " ", "3"}], "]"}]}], ",", " ", 
+                   RowBox[{"b", "=", 
+                    RowBox[{"BitShiftLeft", "[", 
+                    RowBox[{"o", ",", " ", "2"}], "]"}]}], ",", " ", 
+                   RowBox[{"c", "=", 
+                    RowBox[{"BitShiftLeft", "[", 
+                    RowBox[{"o", ",", " ", "1"}], "]"}]}], ",", " ", 
+                   RowBox[{"d", "=", 
+                    RowBox[{"BitShiftRight", "[", 
+                    RowBox[{"o", ",", " ", "1"}], "]"}]}]}], "}"}], ",", 
+                 RowBox[{"BitXor", "[", 
+                  RowBox[{
+                   RowBox[{"BitXor", "[", 
+                    RowBox[{
+                    "a", ",", " ", "b", ",", " ", "c", ",", " ", "d", ",", 
+                    " ", "o"}], "]"}], ",", " ", 
+                   RowBox[{"BitOr", "[", 
+                    RowBox[{
+                    "a", ",", " ", "b", ",", " ", "c", ",", " ", "d", ",", 
+                    " ", "o"}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+                "]"}]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"While", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"EvenQ", "[", "o", "]"}], "&&", 
+                 RowBox[{"o", "!=", "0"}]}], ",", " ", 
+                RowBox[{"o", "=", 
+                 RowBox[{"BitShiftRight", "[", "o", "]"}]}]}], "]"}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"accum", "=", 
+               RowBox[{"BitXor", "[", 
+                RowBox[{"accum", ",", " ", "o"}], "]"}]}], ";"}]}], 
+            "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"!", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"o", "==", "0"}], "||", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"accum", "==", "0"}], "&&", 
+                RowBox[{"MemberQ", "[", 
+                 RowBox[{"periodsToIgnore", ",", " ", 
+                  RowBox[{"BitShiftRight", "[", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"count", "+", "1"}], ")"}], ",", "1"}], "]"}]}], 
+                 "]"}]}], ")"}]}], ")"}]}]}]}], "\[IndentingNewLine]", 
+         "]"}]}], "\[IndentingNewLine]", "]"}], ",", " ", 
+      RowBox[{"CompilerOptions", "->", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\"\<LLVMOptimization\>\"", "->", 
+          RowBox[{"\"\<ClangOptimization\>\"", "[", "3", "]"}]}], ",", " ", 
+         RowBox[{"\"\<OptimizationLevel\>\"", "->", "3"}], ",", 
+         RowBox[{"\"\<InvocationMode\>\"", "->", "\"\<Standalone\>\""}]}], 
+        "}"}]}]}], "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.989669742870686*^9, 3.989669770394154*^9}, {
+   3.989669911604735*^9, 3.989670172101612*^9}, {3.989670202482027*^9, 
+   3.9896702257459993`*^9}, {3.9896702627886553`*^9, 3.989670271833955*^9}, {
+   3.9896703054523163`*^9, 3.989670350184104*^9}, {3.9896703910016727`*^9, 
+   3.9896704204672832`*^9}, {3.989670487452441*^9, 3.989670517881624*^9}, {
+   3.989670556770401*^9, 3.989670561355282*^9}, {3.989670607758252*^9, 
+   3.989670641804356*^9}, {3.989670681750556*^9, 3.989670707337287*^9}, {
+   3.989670749676373*^9, 3.989670830745894*^9}, {3.9896708636011047`*^9, 
+   3.989670870251812*^9}, {3.989670934846889*^9, 3.989671001043367*^9}, {
+   3.989671084553434*^9, 3.98967113526021*^9}, {3.989671186788871*^9, 
+   3.9896711878940477`*^9}, {3.9896712742139797`*^9, 3.989671297621273*^9}, 
+   3.989671334478476*^9, {3.989673679293126*^9, 3.9896736856068974`*^9}, {
+   3.989673728510844*^9, 3.9896737849274063`*^9}, {3.98967382182428*^9, 
+   3.9896738239226913`*^9}, {3.989673969621141*^9, 3.989673969846889*^9}, {
+   3.989674009985812*^9, 
+   3.989674032936355*^9}},ExpressionUUID->"0952ae3b-50cd-4a00-ad47-\
+16c906391ef4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Filter2", "=", 
+   RowBox[{"GenerateFilter2", "[", 
+    RowBox[{"{", 
+     RowBox[{
+     "1", ",", " ", "2", ",", " ", "4", ",", " ", "9", ",", " ", "22"}], 
+     "}"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.9896701729181223`*^9, 3.989670181168075*^9}, {
+  3.9896738134948378`*^9, 3.989673851853488*^9}},
+ CellLabel->
+  "In[204]:=",ExpressionUUID->"0cb0a572-bccf-4f3a-8d40-84feab847e0b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Filter2", "[", "169979", "]"}]], "Input",
+ CellChangeTimes->{{3.989673722356915*^9, 3.989673723683988*^9}, {
+  3.9896738545312862`*^9, 3.989673855177223*^9}},
+ CellLabel->
+  "In[205]:=",ExpressionUUID->"44c90f48-100a-4b8a-94cc-edb96da591bc"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.989673724055431*^9, 3.989673743054406*^9}, {
+   3.98967377589279*^9, 3.989673789834125*^9}, {3.9896738285199757`*^9, 
+   3.9896738554962883`*^9}, 3.9896739742793818`*^9},
+ CellLabel->
+  "Out[205]=",ExpressionUUID->"7682c21a-d1a9-43e4-af88-4ebd6e2ae266"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ParallelSelect", "[", 
+   RowBox[{
+    RowBox[{"Range", "[", "1000000", "]"}], ",", "Filter2"}], "]"}], "//", 
+  "Length"}]], "Input",
+ CellChangeTimes->{{3.98967021502526*^9, 3.989670216195703*^9}, {
+  3.9896702792927303`*^9, 3.989670294981337*^9}, {3.989670473535172*^9, 
+  3.98967050274975*^9}, {3.9896705725218*^9, 3.98967057648419*^9}, {
+  3.989670656360559*^9, 3.98967067048026*^9}, {3.989670717519425*^9, 
+  3.989670739602499*^9}, {3.9896707696335487`*^9, 3.9896707721299553`*^9}, {
+  3.9896708469750977`*^9, 3.989670886255658*^9}, {3.989673693066866*^9, 
+  3.989673699256135*^9}, {3.9896738961041*^9, 3.989673898208931*^9}},
+ CellLabel->
+  "In[201]:=",ExpressionUUID->"6c9d1c83-ddfd-4fef-add6-1418b8f0b756"],
+
+Cell[BoxData["45"], "Output",
+ CellChangeTimes->{{3.989670277022811*^9, 3.9896703103185453`*^9}, 
+   3.9896703532484217`*^9, {3.989670398339531*^9, 3.9896704251760817`*^9}, {
+   3.989670474075786*^9, 3.989670506608725*^9}, {3.989670568394595*^9, 
+   3.989670576700075*^9}, {3.989670646783415*^9, 3.989670670752975*^9}, {
+   3.989670713829218*^9, 3.9896707982025127`*^9}, {3.989670848287586*^9, 
+   3.989670886540573*^9}, {3.989673691362443*^9, 3.989673699800468*^9}, {
+   3.9896738308971367`*^9, 3.98967385640707*^9}, 3.989673898966496*^9},
+ CellLabel->
+  "Out[201]=",ExpressionUUID->"aef06dad-d1cf-4737-8b22-f2916a46f4ba"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.989673909802946*^9, 
+  3.989673913865787*^9}},ExpressionUUID->"51d2fc4e-68f5-494b-bdd9-\
+7b642d4858e2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"AArrayPlot", "[", 
+    RowBox[{"code20rule", ",", " ", "#"}], "]"}], "&"}], "/@", 
+  TemplateBox[<|
+   "InUUID" -> "6c9d1c83-ddfd-4fef-add6-1418b8f0b756", "OutUUID" -> 
+    "aef06dad-d1cf-4737-8b22-f2916a46f4ba", "InUUIDOffset" -> 0, 
+    "KernelEvalInfoKey" -> {"Global`", 37467}, "OutNumber" -> 201, "Status" -> 
+    "PercentReferenceExists_KernelN_InY_OutY", "DisplayCache" -> 
+    TemplateBox[{"\"45\""}, "SmartPercent_Number"]|>,
+   "PercentRef"]}]], "Input",
+ CellChangeTimes->{{3.989673651263742*^9, 3.989673663761318*^9}, {
+  3.9896737048860598`*^9, 3.989673707343466*^9}},
+ CellLabel->
+  "In[200]:=",ExpressionUUID->"7c8f90e2-e3eb-4f96-9f85-4be711b9f8ca"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVNsRwjAMs1iEYyVG6B3f7P9HH7Yku8cGOVJSohBLtuLX9n1vj4j47M9z
+f3A953R85cQlnAtIALnpmg/0HAJqUwKBGABDXLvuAEMggycUNXEZeUyBxUwo
+jKe0IApOJkaqiMHJRUUSsa45uvaKHZkChOVCqInzcPmecseLdMNOLy5OLXm1
+d+J5HGm6Lp7c69hgMiZZQ4tIUAx6bJYN5jPhFcF91rhZvTszTDAGLPPK1P5n
+kTWDG0i1QdDcItEZdrqlUj8SpJyy3resUmswB7SS6s8hBrxqfUBVMMuptgUM
+y/XfukzNLRatlKBPFPPHLeaB1ZmUJ/MaJazO1ODVmVZnsus/3GLRVmdancmy
+outbn9WZvKbyJs/+AWCcCQ0=
+      "], {{0, 0}, {31, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPWdkruz4ZUURlrzKjrGRvEq/+/xsP7jk3Vv2pVIPA99/A
+f778omaNTz+pWuXDD9595803Xn3lxReefebJJx595MEH7r3nzjtuveXGG669
+5sorKla49JKyZS684Nxzzjzj1FNOPKFkiaJFjj3myCMKFjj0kAMP2HefPffY
+dZcdd8ibJ2eObbfZcotNN9lwg3XXWXONVVdZcYVll1lyiUUXyZolY4a0aRZc
+YN55UqaYc45ZZ0maJGGCGWeYdpq4caacYtJJJpxg3HFixhhzDJWoUSJGGHWU
+EUcYdpghhxh0kAEH6LefsGH67KPXXnrsodtuuuyi00467KDddtpso9VWWmwh
+ZIhmm2myiUYbabCBeusJGiRggDrrQH4BK5k2rA==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt11EOwiAMBuAfb+KVPMISn3cGb+6EdgOnS0loefkR4WVLv7BRuvuyPpYb
+gOf2f+HTUh7S1uc0CiiggAIKKKCAAgoooIACCiiggAIKKKCAAgoooIACCiig
+gAIKKKAgWoDTGCxAvkWneAHyHdUUK4AQmilWAJynYEGJW64ftXk6BfIOjIvf
+L9A+rtkFaPsMwZ4HxqbPHsGeB6YI2jwwRQCPJ2AWQC9MDmeoRSA7cNxh1C8o
+iw+PZ2AV1NMkweA82CmQROQEMAmcXgCzAB5pqEfgk4bsAo+DwCoolZh7/CuB
+noUzBFKIalkWL9D877sJLwV7OR4Q/48gj1Efs78F7kngSuBUDfYI4HoOfYdP
+8t5p/SOesAXAsQLVERz4AI7qK1W/wPhJ0071LRIaXyoPjYr4+Fp5AI2kaW/m
+6DHQ
+      "], {{0, 0}, {129, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq1n+N+cC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL9K+l24
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw2NXGAAAQNGXa1nLtm3bdlvuZdvYL98+7J5z83Yv53eDgD//Bv7/jwEE
+GEigQQQZTLAhhBhKqGGEGU64EUT4gx9GEmkUUUYTbQwxxhJrHHHGE28CCSaS
+aBJJJpPsT36aQoqppJpGmumkm0GGmWSaRZbZZJtDjrnkmkee+eRbQIGFFFpE
+kcUUW0KJpZRaRpnllFtBhZVUWkWV1VRbQ4211FpHnfXU20CDjTTaRJPNNNtC
+i6202kab7bTbQYeddNpFl91020OPvfTaR5/99DvAgIMMOsSQwww7woijjDrG
+mOOMO8GEk0w6xZTTTDvDjLPMOsec88y7wIKLLLrEksssu8KKq6y6xprrrPuL
+X/7mtxtsuMmmW2y5zbY77LjLrnvsuc++ogcceMihRxx5zLEnnHjKqWecec65
+F1x4yaVXXHnNtTfceMutd9x5z70PPPjIo088+cyzL7z4yqtvvPnOux98+Mmn
+X3z5zbd/AfEVdvw=
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVUtWxDAMk7kJHIkjzHusuf+OdhrrE3fFuvM6QxK7tqzI5vP1+/36APBz
+fL+Ob1Xxe+xQebY+1+Fp5W+ftcdyx/WJM3qc528rehkey3ae4XoblkQI3gHW
+QzQrQyP3RwYF7Ey2R4MoLbDti9HLoud+5SNp9gdCC4UWd0y6ABpnyCMBXLYi
+twMpbaRrIo0YhrT2+JErmFk3LwG4QMDr5P0jHUT2wgjD6Vgdo+EMrOiUgTO5
+QHJiOED9FcMhHKxizysY3Qi5CD7K0lDYiZQqtbW7rLhEvRXLFNEVw2PoNJPc
+63TDwQuu1OhWb9//VmvUi9taq3b7DrQZUaEDhQvL5LbZyQKeWVhaYNsXo5dF
+z71NGOfumYXPLAw+ytJQ2ImUKrW1u6y4RD26/5mFewjBl9w2O1nAv2ZhS0bv
+ElMQ1k1h3AzCpLEbyjTUhHIUQ/UVrPAsBkoEKKwBYb8V4Rj9bBjpQ55ykUMH
+dwd71OsBl93Qjd+ALEhji9nIKEKuSybu8V+ih4gcJH1/RYWVU0gPd7BOUFel
+Ay+WR8OBI8HJux0OKnwMBw0DKWMoLHr+tintykaOP/r9Cmk=
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt10ESwiAMBdDEm3glj9AZ1z2DN7dCApSOtAv5cfG1FVd5KVAI92V9LDcR
+eW73a7s15rO58tGjEqBPnz59+vTp06dPnz59+vTp06dPnz59+vTp06dPnz59
++vT/zJfDL9bXFEW8ifBTmNpgfbFwuwbop0jHBuhbx6dwNgpgX23uic1GvJ8z
+8CvE319w32aAypUZOGn9bdaBGH+3DuD9MgZncWf56ekt7Cj0vOdXW4bGm9HE
+/V9y58twDKbWHxY0zLfVONBXW4jC/Bw+1NdRByDqXxm8gpj6+3s9iKr/vQt6
+BuY7FeTbMiB9JwDPX/k97DYE6Pmv1OVRvnV9lF+rkii/VoZRflcY433fkXwk
+cpl08bj6swy03ZprPsgMmu95nTYng3JK8aUJmUBx/R+4A1rXT+2TE3gDw1Qx
+0A==
+      "], {{0, 0}, {129, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq1n+N+cC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL9K+l24
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw2NXGAAAQNGXa1nLtm3bdlvuZdvYL98+7J5z83Yv53eDgD//Bv7/jwEE
+GEigQQQZTLAhhBhKqGGEGU64EUT4gx9GEmkUUUYTbQwxxhJrHHHGE28CCSaS
+aBJJJpPsT36aQoqppJpGmumkm0GGmWSaRZbZZJtDjrnkmkee+eRbQIGFFFpE
+kcUUW0KJpZRaRpnllFtBhZVUWkWV1VRbQ4211FpHnfXU20CDjTTaRJPNNNtC
+i6202kab7bTbQYeddNpFl91020OPvfTaR5/99DvAgIMMOsSQwww7woijjDrG
+mOOMO8GEk0w6xZTTTDvDjLPMOsec88y7wIKLLLrEksssu8KKq6y6xprrrPuL
+X/7mtxtsuMmmW2y5zbY77LjLrnvsuc++ogcceMihRxx5zLEnnHjKqWecec65
+F1x4yaVXXHnNtTfceMutd9x5z70PPPjIo088+cyzL7z4yqtvvPnOux98+Mmn
+X3z5zbd/AfEVdvw=
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVNsRwjAMs1iEYyVG6B3f7P9HH7Yku8cGOVJSohBLtuLX9n1vj4j47M9z
+f3A953R85cQlnAtIALnpmg/0HAJqUwKBGABDXLvuAEMggycUNXEZeUyBxUwo
+jKe0IApOJkaqiMHJRUUSsa45uvaKHZkChOVCqInzcPmecseLdMNOLy5OLXm1
+d+J5HGm6Lp7c69hgMiZZQ4tIUAx6bJYN5jPhFcF91rhZvTszTDAGLPPK1P5n
+kTWDG0i1QdDcItEZdrqlUj8SpJyy3resUmswB7SS6s8hBrxqfUBVMMuptgUM
+y/XfukzNLRatlKBPFPPHLeaB1ZmUJ/MaJazO1ODVmVZnsus/3GLRVmdancmy
+outbn9WZvKbyJs/+AWCcCQ0=
+      "], {{0, 0}, {31, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPWdkruz4ZUURlrzKjrGRvEq/+/xsP7jk3Vv2pVIPA99/A
+f778omaNTz+pWuXDD9595803Xn3lxReefebJJx595MEH7r3nzjtuveXGG669
+5sorKla49JKyZS684Nxzzjzj1FNOPKFkiaJFjj3myCMKFjj0kAMP2HefPffY
+dZcdd8ibJ2eObbfZcotNN9lwg3XXWXONVVdZcYVll1lyiUUXyZolY4a0aRZc
+YN55UqaYc45ZZ0maJGGCGWeYdpq4caacYtJJJpxg3HFixhhzDJWoUSJGGHWU
+EUcYdpghhxh0kAEH6LefsGH67KPXXnrsodtuuuyi00467KDddtpso9VWWmwh
+ZIhmm2myiUYbabCBeusJGiRggDrrQH4BK5k2rA==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVElyxDAIbPKT5El5wlTlnP/f4rGhF8mnnO0a10iAoWm1+Hz9fr8+APwc
+79fx1vlg3sOAuszz9tOxaDvMNhEdjusJGyPe9tOLWUZE+942XF/DigjBmaB/
+RNMVBrn/5FDCqWT7oQOlBZZ9MXtZ9tx3PZJmfxBaKLW4Y9EGaJwhTQLYviK3
+G1L6SNeONHIY0lrzR61gpk9eAnCBgMfJ80cGiOzGCMPpWB2j4QysmJKBM7lA
+cmI4QP0V0yECrGOvKxhzEXIRfJSVobATKVVqaw/pvES9NMsScSu2iE2nWeRe
+pwsOHnClRpd+5/yXXqNf3PZatfpXoMOIGt1QuLBMboufLOCZhaUFln0xe1n2
+3NuEce6eWfjMwuCjrAyFnUipUlt7SOcl6u32P7NwTSH4ktviJwv41ywcyehb
+YgrC5lIYNxth0thGGRzt0LO3YkpXO6UPTDaYzuUcSnXvDAb51R8WGEwm6cAD
+WNEnY957EBbUzs1lIqeIo1GIsYw4oB2b9S0iJkQGELIAk0+qhCQ7FqkXQp5w
+9cVMxW08iCYOiuhZY8mllLRQJcPZPkHs1G+utsapsXE8fweRCmk=
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt11EOwiAMBuAfb+KVPMISn3cGb+6EdgOnS0loefkR4WVLv7BRuvuyPpYb
+gOf2f+HTUh7S1uc0CiiggAIKKKCAAgoooIACCiiggAIKKKCAAgoooIACCiig
+gAIKKKAgWoDTGCxAvkWneAHyHdUUK4AQmilWAJynYEGJW64ftXk6BfIOjIvf
+L9A+rtkFaPsMwZ4HxqbPHsGeB6YI2jwwRQCPJ2AWQC9MDmeoRSA7cNxh1C8o
+iw+PZ2AV1NMkweA82CmQROQEMAmcXgCzAB5pqEfgk4bsAo+DwCoolZh7/CuB
+noUzBFKIalkWL9D877sJLwV7OR4Q/48gj1Efs78F7kngSuBUDfYI4HoOfYdP
+8t5p/SOesAXAsQLVERz4AI7qK1W/wPhJ0071LRIaXyoPjYr4+Fp5AI2kaW/m
+6DHQ
+      "], {{0, 0}, {129, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq1n+N+cC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL9K+l24
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw2NXGAAAQNGXa1nLtm3bdlvuZdvYL98+7J5z83Yv53eDgD//Bv7/jwEE
+GEigQQQZTLAhhBhKqGGEGU64EUT4gx9GEmkUUUYTbQwxxhJrHHHGE28CCSaS
+aBJJJpPsT36aQoqppJpGmumkm0GGmWSaRZbZZJtDjrnkmkee+eRbQIGFFFpE
+kcUUW0KJpZRaRpnllFtBhZVUWkWV1VRbQ4211FpHnfXU20CDjTTaRJPNNNtC
+i6202kab7bTbQYeddNpFl91020OPvfTaR5/99DvAgIMMOsSQwww7woijjDrG
+mOOMO8GEk0w6xZTTTDvDjLPMOsec88y7wIKLLLrEksssu8KKq6y6xprrrPuL
+X/7mtxtsuMmmW2y5zbY77LjLrnvsuc++ogcceMihRxx5zLEnnHjKqWecec65
+F1x4yaVXXHnNtTfceMutd9x5z70PPPjIo088+cyzL7z4yqtvvPnOux98+Mmn
+X3z5zbd/AfEVdvw=
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVEGSwjAMk/jIzn6JJzDDef9/oxRbklMue8/QTkrU2pKt+Pfxd3/cADyP
+++e4efxAvp84lw/Ggnnus9bePt8E+oNetOW3wI4GRT1XBtAvFSBq4+umxjXs
+SNE0C0Iv2mYrLLCZGWXwtJYqgcglqSbGJIfOZGJTM6b2zo0qARG1MBriMl23
+Dxi61RC1z9HdZlMrXuNZeIUTzdSlyLOPA754LWJ/91rmVtsYPjNuVy6yhjRc
+ZZEriAW2eW3q/Nhkw+ABSi0EhlssutKubunSLwVyTdXvS1WlFaqBrOT+6zID
+HbV50V0Iy7m3DSyWm/99mIZbItueTHsyRVV8fPu3J1P21N7ckymO2p5MezJl
+KOSD8D2Z/juZXmKqCQs=
+      "], {{0, 0}, {31, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPWdkruz4ZUURlrzKjrGRvEq/+/xsP7jk3Vv2pVIPA99/A
+f778omaNTz+pWuXDD9595803Xn3lxReefebJJx595MEH7r3nzjtuveXGG669
+5sorKla49JKyZS684Nxzzjzj1FNOPKFkiaJFjj3myCMKFjj0kAMP2HefPffY
+dZcdd8ibJ2eObbfZcotNN9lwg3XXWXONVVdZcYVll1lyiUUXyZolY4a0aRZc
+YN55UqaYc45ZZ0maJGGCGWeYdpq4caacYtJJJpxg3HFixhhzDJWoUSJGGHWU
+EUcYdpghhxh0kAEH6LefsGH67KPXXnrsodtuuuyi00467KDddtpso9VWWmwh
+ZIhmm2myiUYbabCBeusJGiRggDrrQH4BK5k2rA==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVNsRwjAMk1mEYyVG4I5v9v+jD1uSXdgg0JAQpbHkKH68Ps/XDcB7a/et
+IaLa9kFkX9Oxr8DZ7T/ZcUqrkG8fw9rxmDSgFiWAwAAY4lx1BRiiaCaE6jgd
+uU2BxUxoGE9pyRSQnJMqYuHkUJFErGtG116xkSkIWC6EmjgPl+OUOwbSHbZ7
+cXFqyauNied2pOm6uHM/xwaTMcka+tNrHpvHFuYz4XLlkNWk4SorYoIYsMwr
+U/vLImsGN5BqQdDcItEZdrqlUj8SpJzyvC9ZpVYwB7SSzp+PGPCq9Sd0CmY5
+nW0Bw3L9vy5Tc4tFKyXRO4r54xbzwKpMypN5jRJWZWrwqkyrMtn1H26xaKsy
+rcpkWdH1re+qTF9z7AkM
+      "], {{0, 0}, {31, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPWdkruz4ZUURlrzKjrGRvEq/+/xsP7jk3Vv2pVIPA99/A
+f778omaNTz+pWuXDD9595803Xn3lxReefebJJx595MEH7r3nzjtuveXGG669
+5sorKla49JKyZS684Nxzzjzj1FNOPKFkiaJFjj3myCMKFjj0kAMP2HefPffY
+dZcdd8ibJ2eObbfZcotNN9lwg3XXWXONVVdZcYVll1lyiUUXyZolY4a0aRZc
+YN55UqaYc45ZZ0maJGGCGWeYdpq4caacYtJJJpxg3HFixhhzDJWoUSJGGHWU
+EUcYdpghhxh0kAEH6LefsGH67KPXXnrsodtuuuyi00467KDddtpso9VWWmwh
+ZIhmm2myiUYbabCBeusJGiRggDrrQH4BK5k2rA==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVUtWxDAMk7kJHIkjzHusuf+OdhrrE3fFuvM6QxK7tqzI5vP1+/36APBz
+fL+Ob1Xxe+xQebY+1+Fp5W+ftcdyx/WJM3qc528rehkey3ae4XoblkQI3gHW
+QzQrQyP3RwYF7Ey2R4MoLbDti9HLoud+5SNp9gdCC4UWd0y6ABpnyCMBXLYi
+twMpbaRrIo0YhrT2+JErmFk3LwG4QMDr5P0jHUT2wgjD6Vgdo+EMrOiUgTO5
+QHJiOED9FcMhHKxizysY3Qi5CD7K0lDYiZQqtbW7rLhEvRXLFNEVw2PoNJPc
+63TDwQuu1OhWb9//VmvUi9taq3b7DrQZUaEDhQvL5LbZyQKeWVhaYNsXo5dF
+z71NGOfumYXPLAw+ytJQ2ImUKrW1u6y4RD26/5mFewjBl9w2O1nAv2ZhS0bv
+ElMQ1k1h3AzCpLEbyjTUhHIUQ/UVrPAsBkoEKKwBYb8V4Rj9bBjpQ55ykUMH
+dwd71OsBl93Qjd+ALEhji9nIKEKuSybu8V+ih4gcJH1/RYWVU0gPd7BOUFel
+Ay+WR8OBI8HJux0OKnwMBw0DKWMoLHr+tintykaOP/r9Cmk=
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVNsRwjAMk1mEYyVG4I5v9v+jLdHDCSPkSEkbJ7ZkK368Ps/XDcD7eO7H
+U6hzVPFl+j42nP+41nK6jv7mAk+MmcvXToAHOGnJu1D0Bnk1ojgdGAWtnSa0
+mt22EIQ5TOCk5SLDYSQyWytwmstIgcAlKAKrBAdGMrDOGZ07Y4/KsQoMT2uQ
+y3AsH9B4qyAqn727zIY2cLV32Yc7wUxe8tzr2MyL1sL3f61lbJWtQme2W5UT
+rUYNK62q2YjJbPFa1HnYYEPgYRRbyBhqMekRdlYLUz8lyDlVvZesiiuUA0nJ
+9dcwAl21PspVCMm5tjRMkuvfvkxNLRFtd6bdmSIrvr787c6UNbU2d2eKq7Y7
+0+5M6Qr5IvvuTEtn+gKmygkQ
+      "], {{0, 0}, {31, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPWdkruz4ZUURlrzKjrGRvEq/+/xsP7jk3Vv2pVIPA99/A
+f778omaNTz+pWuXDD9595803Xn3lxReefebJJx595MEH7r3nzjtuveXGG669
+5sorKla49JKyZS684Nxzzjzj1FNOPKFkiaJFjj3myCMKFjj0kAMP2HefPffY
+dZcdd8ibJ2eObbfZcotNN9lwg3XXWXONVVdZcYVll1lyiUUXyZolY4a0aRZc
+YN55UqaYc45ZZ0maJGGCGWeYdpq4caacYtJJJpxg3HFixhhzDJWoUSJGGHWU
+EUcYdpghhxh0kAEH6LefsGH67KPXXnrsodtuuuyi00467KDddtpso9VWWmwh
+ZIhmm2myiUYbabCBeusJGiRggDrrQH4BK5k2rA==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt10ESwiAMBdDEm3glj9AZ197Bk1shgZaOtAuTv/lqxVV4hjaE+/J6LDcR
+ea7Xe70U9Fonlu/0MAEBBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAAB
+BBBAAAEEEPBPgBy+kwFawogPEECJ04dkgFi83ZAJKKGOQybAcl/i2UJkA9Ru
+QLFbEgCoBP9gAPtPPsDuApUrt2FUKd7UAxBgVw8AgLYMZ4HDAOX/W9xZ7MAM
+qNWj+c4U2Q9Izb9MlyG2IbGoOIAVZiRArSLhADU+FqCzFKR0xTJ5EpPa8t89
+Ytq5wJMwzpMH8LlQACsHMqYh82hWH8dhc8g9G7Z2HQaw7MMAvU2BAXq3CAMM
+7TIA4NuTL0ZtnC6eZf9H0O1O3UGphM37vHULIrTji9eoVEGb2H/Fp+AD+Igy
+PA==
+      "], {{0, 0}, {130, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq13+J+cC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL+cQl4e
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9VSFQAAQMFDd3dJd3c3Snc3XDh0l1Ii+uP64M5sYeB6IRAC/Pk3+P9/
+DCLIYIINIcRQQg0jzHDCjSDCSCKNIspooo0hxlhijSPOeOJNIMFEEk0iyWSS
+TSHFVFJNI8100s0gw0wyzSLLbLLNIcdccs0jzy98MZ98CyiwkEKLKLKYYkso
+sZRSyyiznHIrqLCSSquosppqa6ixllrrqLOeehtosJFGm2iymWZbaLGVVtto
+s512O+iwk0676LKbbnvosZde++izn34HGHCQQYcYcphhRxjxK1/9xjdHGXWM
+MccZd4IJJ5l0iimnmXaGGWeZdY4555l3gQUXWXSJJZdZdoUVV1l1jTXXWXeD
+DTfZdIstt9l2hx132XWPPffZN0DAAw485FDRI4485tgTTjzl1DPOPOfcCy68
+5NIrrrzm2htuvOXWO+68594HHnzk0See/M53f/DDZ5594cVXXn3jzXfe/clP
+P/jwF7/85NPf/PYv0qx4Zg==
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVVtyw0AIE71Je6QeITP97v3/miagB+sj2GMna1sBoRXk8/H7/fgA8PO8
+vp5XvQ7U/zKuWgf6KRq9AXhh+vu9jCAgBp1Oz5SiyfCzMtHwwvuIZ15Js51l
+VtOVsJaoRgxeAfokm87AKu3UCwWcTHY/iqO0wLovRi+Lnvedj6LZF8QWCi3t
+tFG93dIM+UgE+11R24Mp31Guk2nEMKa140euUKZ3XgZwg4Dbyf1HAtycZlkY
+ggKRo/EMrpiUuyGsDqQmxgP0XzEcAmAVe17RmEbIRehRlobGTqZ0qa0d0nHJ
++uh+NZP64UAcPs0k1z5dPLjBlR5d9WqGXYypPecuEPcsJE1a5p6FJLjnEw6m
+9yz0NPz9PQtH1e3TTHLt08XjnoUhmE0i3qwYYzSYNodg8tiFZBpqYnkUQ/cV
+rPAsBkoEKKwRYb8V6Zj8bBj5Q0hBBJjgDrBTvR502Q3T+EPIggy3mI2MIuba
+ZPI+/iVmiAgg6/tPVFi5hEQ4wDpBXZUAbiwfHQDyqhHjAFAhTUEH/AFQxApf
+
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVFtyw0AIE71Je6QeITP97v3/miagB+sj2BPHu2sMQgg+H7/fjw8AP8/7
+63nXXKj/Xdy1LvQp2nob4GXTz/cynIA26HA6U4gGw//KQIML7yvOPJNGO8vM
+pjNhLpGNELwc9I9oOgKztJ9eyOFEsj0GRGmBtS96L/Oe+45H0uwBoYVcizsV
+qsstzpBHAtjvitweSPmOdJ1Iw4chre0/YgUzXXkJwAUClpP1Rxq4OE2y2QoV
+eANnYMWE3A1heSA5MRyg/oruEAaWsccVjGmEXAQfZWEo7ERKldraTdovUR/d
+r2ZSPxwWh04zyLVOFw4WuFKjK1/NsIsxtefchcU9CwmTkrlnIQHu+YQD6T0L
+PQy/v2fhsLp1mkGudbpw3LMwCLNJxM3yMUKDcXMQJo0dlMHRDj1nKqZ0pVP6
+wGSDyVwvh1L1ncEgv3pgwaAzSQduwIg+GbPvQVhQOhfNRE4RpZGJsYwo0InN
+8hYRY6IDELIAk0+qhCQ7FqkXQp5w9cVMxS2QqQcVdzadJhxk8AddIwpf
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt10ESwiAMBdDEm3glj9AZ1z2DN7dCApSOtAv5cfG1FVd5KVAI92V9LDcR
+eW73a7s15rO58tGjEqBPnz59+vTp06dPnz59+vTp06dPnz59+vTp06dPnz59
++vT/zJfDL9bXFEW8ifBTmNpgfbFwuwbop0jHBuhbx6dwNgpgX23uic1GvJ8z
+8CvE319w32aAypUZOGn9bdaBGH+3DuD9MgZncWf56ekt7Cj0vOdXW4bGm9HE
+/V9y58twDKbWHxY0zLfVONBXW4jC/Bw+1NdRByDqXxm8gpj6+3s9iKr/vQt6
+BuY7FeTbMiB9JwDPX/k97DYE6Pmv1OVRvnV9lF+rkii/VoZRflcY433fkXwk
+cpl08bj6swy03ZprPsgMmu95nTYng3JK8aUJmUBx/R+4A1rXT+2TE3gDw1Qx
+0A==
+      "], {{0, 0}, {129, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq1n+N+cC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL9K+l24
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw2NXGAAAQNGXa1nLtm3bdlvuZdvYL98+7J5z83Yv53eDgD//Bv7/jwEE
+GEigQQQZTLAhhBhKqGGEGU64EUT4gx9GEmkUUUYTbQwxxhJrHHHGE28CCSaS
+aBJJJpPsT36aQoqppJpGmumkm0GGmWSaRZbZZJtDjrnkmkee+eRbQIGFFFpE
+kcUUW0KJpZRaRpnllFtBhZVUWkWV1VRbQ4211FpHnfXU20CDjTTaRJPNNNtC
+i6202kab7bTbQYeddNpFl91020OPvfTaR5/99DvAgIMMOsSQwww7woijjDrG
+mOOMO8GEk0w6xZTTTDvDjLPMOsec88y7wIKLLLrEksssu8KKq6y6xprrrPuL
+X/7mtxtsuMmmW2y5zbY77LjLrnvsuc++ogcceMihRxx5zLEnnHjKqWecec65
+F1x4yaVXXHnNtTfceMutd9x5z70PPPjIo088+cyzL7z4yqtvvPnOux98+Mmn
+X3z5zbd/AfEVdvw=
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVNsRwjAMs1iEYyVG6B3f7P9HH7Yku8cGOVJSohBLtuLX9n1vj4j47M9z
+f3A953R85cQlnAtIALnpmg/0HAJqUwKBGABDXLvuAEMggycUNXEZeUyBxUwo
+jKe0IApOJkaqiMHJRUUSsa45uvaKHZkChOVCqInzcPmecseLdMNOLy5OLXm1
+d+J5HGm6Lp7c69hgMiZZQ4tIUAx6bJYN5jPhFcF91rhZvTszTDAGLPPK1P5n
+kTWDG0i1QdDcItEZdrqlUj8SpJyy3resUmswB7SS6s8hBrxqfUBVMMuptgUM
+y/XfukzNLRatlKBPFPPHLeaB1ZmUJ/MaJazO1ODVmVZnsus/3GLRVmdancmy
+outbn9WZvKbyJs/+AWCcCQ0=
+      "], {{0, 0}, {31, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPWdkruz4ZUURlrzKjrGRvEq/+/xsP7jk3Vv2pVIPA99/A
+f778omaNTz+pWuXDD9595803Xn3lxReefebJJx595MEH7r3nzjtuveXGG669
+5sorKla49JKyZS684Nxzzjzj1FNOPKFkiaJFjj3myCMKFjj0kAMP2HefPffY
+dZcdd8ibJ2eObbfZcotNN9lwg3XXWXONVVdZcYVll1lyiUUXyZolY4a0aRZc
+YN55UqaYc45ZZ0maJGGCGWeYdpq4caacYtJJJpxg3HFixhhzDJWoUSJGGHWU
+EUcYdpghhxh0kAEH6LefsGH67KPXXnrsodtuuuyi00467KDddtpso9VWWmwh
+ZIhmm2myiUYbabCBeusJGiRggDrrQH4BK5k2rA==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVMlxwzAMXKSRjFtKCZ7JO/3/IovcA6TdAS17RAsUgD2Ix/Pv5/kF4Pf6
+fV+/uj64rsLr81re9/GsRrQwdszr3lQzPt+8l7lQHDPlumB21nLu8ZDFx2Zd
+c634TKc24dRCNnrhqofVsZqNKBuBwFSvXYimElZAAzdUixoOdlhVaxBLuMCk
+c+vysptlYbSg0EJBS2JXsKvIbzJMNjL7UJ96b6wKK8SBrGT99XUH04aWVADR
+89Av/k8+UsX2n7kWt0Q1Iql+E5gPbgkPmBiSIvZDRB3GFE5KtNO5tNbe1qld
+07YSgl/thPpxEWEYcZq9kh5bhezaDdUadGOVzYGVmpfPZIpb5H7vtax9JlMn
+yJxK741VYYU4kJWs/5lMKZyUaKdzae1MJpZz9EymOpOpcyq9N1aFFeJgU+zN
+ZGrZ6ZaVF5csN7GRlqNiRv8BhU0JMQ==
+      "], {{0, 0}, {31, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPWdkruz4ZUURlrzKjrGRvEq/+/xsP7jk3Vv2pVIPA99/A
+f778omaNTz+pWuXDD9595803Xn3lxReefebJJx595MEH7r3nzjtuveXGG669
+5sorKla49JKyZS684Nxzzjzj1FNOPKFkiaJFjj3myCMKFjj0kAMP2HefPffY
+dZcdd8ibJ2eObbfZcotNN9lwg3XXWXONVVdZcYVll1lyiUUXyZolY4a0aRZc
+YN55UqaYc45ZZ0maJGGCGWeYdpq4caacYtJJJpxg3HFixhhzDJWoUSJGGHWU
+EUcYdpghhxh0kAEH6LefsGH67KPXXnrsodtuuuyi00467KDddtpso9VWWmwh
+ZIhmm2myiUYbabCBeusJGiRggDrrQH4BK5k2rA==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVElyxDAIbPKT5El5wlTlnP/f4rGhF8mnnO0a10iAoWm1+Hz9fr8+APwc
+79fx1vlg3sOAuszz9tOxaDvMNhEdjusJGyPe9tOLWUZE+942XF/DigjBmaB/
+RNMVBrn/5FDCqWT7oQOlBZZ9MXtZ9tx3PZJmfxBaKLW4Y9EGaJwhTQLYviK3
+G1L6SNeONHIY0lrzR61gpk9eAnCBgMfJ80cGiOzGCMPpWB2j4QysmJKBM7lA
+cmI4QP0V0yECrGOvKxhzEXIRfJSVobATKVVqaw/pvES9NMsScSu2iE2nWeRe
+pwsOHnClRpd+5/yXXqNf3PZatfpXoMOIGt1QuLBMboufLOCZhaUFln0xe1n2
+3NuEce6eWfjMwuCjrAyFnUipUlt7SOcl6u32P7NwTSH4ktviJwv41ywcyehb
+YgrC5lIYNxth0thGGRzt0LO3YkpXO6UPTDaYzuUcSnXvDAb51R8WGEwm6cAD
+WNEnY957EBbUzs1lIqeIo1GIsYw4oB2b9S0iJkQGELIAk0+qhCQ7FqkXQp5w
+9cVMxW08iCYOiuhZY8mllLRQJcPZPkHs1G+utsapsXE8fweRCmk=
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt180NgzAMBeCXbtKVOgJSz92hk5eGGEKhyJZi+/JomlxAfMqPbe7T6zHd
+ADzn/xvfq9SuzC3pIoEEEkgggQQSSCCBBBJIIIEEEkgggQQSSCCBBBJIIIEE
+EkgggQQSSDAScOijCaiPyJBAQH2iG4IJaIbdEEwAjkM0YXnxcv+wI2QktH0w
+EGAnSBt46QnYtxTCGg8GB1ILYY0HOYR9PMghwGUR1ATIjcUjo2oI7SAOzEx2
+wjL/cFkGLaEfsgijI6KR0CKSl0BF8NoEagJc4pGF4BSP9ASXpKAlLMWZP+CK
+IJkxhdCqU6nUEgiSC5zP4iVhrdIjAH8ItQ/70j0n+AeDK4JXhWghwDcp/b6/
+tM0nFVEDxU0BtjnoMnLkGmwFWel+kYAi8af7SIkFtFJEXotTwAcYbzI8
+      "], {{0, 0}, {130, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq13+J+cC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL+cQl4e
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9VSFQAAQMFDd3dJd3c3Snc3XDh0l1Ii+uP64M5sYeB6IRAC/Pk3+P9/
+DCLIYIINIcRQQg0jzHDCjSDCSCKNIspooo0hxlhijSPOeOJNIMFEEk0iyWSS
+TSHFVFJNI8100s0gw0wyzSLLbLLNIcdccs0jzy98MZ98CyiwkEKLKLKYYkso
+sZRSyyiznHIrqLCSSquosppqa6ixllrrqLOeehtosJFGm2iymWZbaLGVVtto
+s512O+iwk0676LKbbnvosZde++izn34HGHCQQYcYcphhRxjxK1/9xjdHGXWM
+MccZd4IJJ5l0iimnmXaGGWeZdY4555l3gQUXWXSJJZdZdoUVV1l1jTXXWXeD
+DTfZdIstt9l2hx132XWPPffZN0DAAw485FDRI4485tgTTjzl1DPOPOfcCy68
+5NIrrrzm2htuvOXWO+68594HHnzk0See/M53f/DDZ5594cVXXn3jzXfe/clP
+P/jwF7/85NPf/PYv0qx4Zg==
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt11EOgjAMBuB/3sQreQQTn72CRxe3FjZB0iVrF5MfYXuB9ANsV6735+1+
+AfBYjhc+W8pDWvYpGwEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEE
+EEAAAQT8IQC7MRaAfIlO4QDkK6opFAARNFMoANhPsYAStpw/KG06AfL+h4Xv
+B+g+bLMD0O4TAGv+Dy2aPYA1/2cA2vyfAYDD4zcDoCem8aumBSCpN2z96QeU
+Jw+HF2AF1NMcwNjq1wmQ+uMT3wTweflmAByqTw/ApfrYAQ7F3woobZd3+DOA
+rn4TANJzag8WDtCa75p9p4C17/YP/wOQx6Dv1WOAd/KfAXw6vx4APJee7+hJ
+/nLa7Qgn6vax3X+15sY9/a3VStUvLnzSalN9ckSGl0ZDgyI8vDYaQAOJi65r
+rToOMu8N3RoxaA==
+      "], {{0, 0}, {128, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq1X+B+dC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL/5o11S
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw2NXHgAAgNEnW8vWWrZtLdt668m2a/98+7B7zi0MXM0HQoA//wb//49B
+BBlMsCGEGEqoYYQZTrgRRBhJpFFEGU20McQYS6xxxBlPvAkkmEiiSST5gx8m
+k2wKKaaSahppppNuBhlmkmkWWWaTbQ455pJrHnnmk28BBRZSaBFFFlPsT35a
+Qom/+GUppZZRZjnlVlBhJZVWUWU11dZQYy211lFnPfU20GAjjTbRZDPNttBi
+K6220WY77XbQYSeddtFlN9320GMvvfbRZz/9DjDgIIMOMeQww44w4iijjjHm
+OOP+5rcTTDjJpFNMOc20M8w4y6xzzDnPvAssuMiiSyy5zLIrrLjKqmusuc66
+G2y4yaZbbLnNtjvsuMuue+wZIOA++x5woOghhx5x5DHHnnDiKaeeceY5515w
+4SWXXnHlNdfecOMtt95x5z33PvDgI48+8eQzz77w4iuvvvHmO+9+8OEnn37x
+5Tff/gUVN3WU
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVUt2w0AIE71Je6Qeoe913fvvmqSgD+NV1/ZzkvGAQWgEef/6+fx6A/D9
++Hw8PvW45qfA79nrqzefuxjL7NHjuf+yYpbh0bbnHv7ehiURgleAvommM/Qi
+bhkUcDLZMwZEaYH1XIxeFj2fO18t7tDIx1OhxR2TNkDjDLklgG0rcnsgpY10
+nUgjhiGtHT9yBTN98hKACwQ8Tp4/0kFkN0YYTsfqGA1nYMWkDJzJBZITwwHq
+rxgO4WAVe17BmEbIRfBRlobCTqRUqa3dpeMS9SqWKaIrDo9Dp5nkWqcLBw+4
+UqOr3jn/VWvUi8taq7Z9Ax1GVOiBwoVlclt2sgDaU2Mi456FHCR7sOwJ49zd
+s/CehcFHWRoKO5FSpbZ2l45L1Ef337NwhxB8yW3ZyQL+NQtHMnqXmIKwaQrj
+5iBMGrugTENNKI9iqL6CFZ7FQIkAhTUg7LciHKOfDSN9yFMucpjg7mC3ej3g
+shum8QeQBRlsMRsZRch1yMR9/EvMEJGDpO+vqLByCunhDtYJ6qp04MFy63Dg
+SHDyLoeDCj+Gg4aBlHEoLHr+sintyC4GUHST5+zrF94CCmo=
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt2FuOwjAMBVCHncyWZglIfCOx/49hmthxn0qCbySkWxUCaKrTxrXrzM/9
++Xu/icjj/XrJ/5aWt/TeJ20kSZIkSZIkSZIkSZIkSZIkSZIkSZIk+ZWk7N7R
+pCzH6DCBlOUQN4BJKeZqAJMi+wFNZigfMHqP95IljuPgAKn7+NZBynqfQlo+
+flapukjLxznkOh/nkBIxqe2k6F+mgEdOE1kSY7ySD5B5PiViWptJP8wiP6w4
+vWSpAEFiGxkUxHZSIvK/i4zJ/w4yoqg2k7nZCAcvSX1yTCFLN6WdxwRSa2ls
+blyT1jUCwENSrzCB1kZHZK42kDiekgkWx3MyusZdk9bGocQtKTWUKHFH6nec
+uCdLksy8SvNApi3ddMkodX5RotZu6/2tvoJAFbU3ts+wSbXi7coNoAtw5DZ8
+/jxQpJeAXYB61dC8h3UBKpZ8LPGDdgGF1KWU/4YMY01APQH7FSZubpSwJfk5
+aTXVXR0SrNkhdgaRS7lD0d+v2lhBSfs/g/VV2DCmZM/82jeiwaTLcFcF6vYH
+07crdg==
+      "], {{0, 0}, {114, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPmRkRslVGSFb2rIwQQrJ3xqtzvv//wIN7zk1Uf8rVIPD9
+N/CfL7/49JMPP6ha5d133nzj1VdefOHZZ5584tFHHnzg3nvuvOPWW2684dpr
+Kla48oqyZS695MILzj2nZIkzzzj1lBNPKFrk2GOOPOLQQwoWOPCAfffZc49d
+d8mbJ2eOrFl23GHbbbbcYtNNNtxg3XXWXGPVVVZcYdllllxi0UUyZlhwgXnn
+mXOOWWeZcYa0aaadJmWKKaeYdJIJJ0iaZNxxxhxj1FFGHCFhgrhxYsYYdpgh
+hxh0kAEH6LefPvvotZcee4gapdtuuuyi004iRuiwg3bbCRumzTZabaXFFppt
+JmSIJptotJEGG6i3njrrqLWWoEECBqixBuQXh3dXvg==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9VSAgAAAMET7O4uVOzuRrADA7sVPVsx/n9GH9yZDSVTiWQQ+Pkb+P/H
+NNIMEDBI0HTSzSDDTDLNIstsss0hx1xyzSPPfPItoMBCCi2iyGKKLaHEUkot
+o8xyyq2gwkoqraLKaqqtocZaaq2jznrqbaDBRhptoslmmg0RsoUWW2m1jTbD
+hG2n3Q467KTTLrrsptseeuyl1z767KffAQYcZNAhhhxm2BFGHGXUMcYcZ9wJ
+Jpxk0immnGbaGWacZdY55pxn3ggRF1gwStQYMRdZdIkll1l2hRVXWXWNNddZ
+d4MNN9l0iy3jxN1m2x123GXXPfZMkHCffQ848JBDjzjymGNPOPGUU88485xz
+L7jwkkuvuPKaa2+48ZZbkyS948577hV94MFHHn3iyWeefeHFV15948133v3g
+wxQpP/n0iy+/+fYXT7ditg==
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVUlywzAMA/uT9kl9QmZy7v9vdRwRC+VeerbHGcsiTYIQyHw+fr4fHwCe
+x+/r+NVxoc5H4X2V71W/vfZPK3oZHsv22sP7a4Y6v++QZ4B1dxKsDGsRtwwK
+2JnsHQ2itMB4L0Yvi57vK1+H9geEFgot7ph0ATTOkFsCuGxFbjektJGuHWnE
+MKQ140euYGadvAQghxWv7TxodxDZCyMMp2N1jIYzsKJTBs7kAsmJ4QD1VwyH
+cLCKPa9gdCPkIvgoS0NhJ1Kq1NbusuIS9SiWKaIrNo9Np5nkWqcDBw+4UqOj
+3j7/UWvUi8taq6Z9Am1GVOiGwoVlcht2sgDaU2MiQ2NlVNJgMLjzSu5Z2J5/
+aKyD+OCD8XXPQsd4z8J7Fk5GVOiGwoVlcht2soB/zcKWjL4lpiCsm8K42QiT
+xi4o01ATyq0Yqq9ghWcxUCJAYQ0I+60Ix+hnw0gf8pSLHDq4O9itXg+47IZu
+/AZkQRpbzEZGEXIdMnFv/xI9ROQg6fsnKqycQnq4g3WCuiodeLDc2hw4Epy8
+y+GgwrfhoGEgZWwKi56/bEo7sosBFN3kOQOGj4UZ4hezVgpm
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVElyxEAIE/lJ8qQ8Yapyzv9vmaXRAj7lPFP2uN1gEELN5+33+/YB4Od+
+f93vev3OCgX+l6wyPXfRlt6jx2P/aUUvw+PYHnt4fQ1LIgTPAOcimpPhLOKS
+QQE7k72jQZQWGO/F6GXR8/3kI2n2gNBCocUdkx6AxhlySwCPrcjtQkob6dpI
+I4YhrRk/cgUzp/MSgAsEbCf7j3QQ2QcjDKdjdYyGM7CiUwbO5ALJieEA9VcM
+h3Cwij2vYPRByEXwUZaGwk6kVKmt3eXEJepRLFPEqVgeS6eZ5FqnAwcbXKnR
+UW/3f9Qa9eKy1qppn0CbERW6ULiwTG7DThZAe2pMZLxnIQfJHCxzwjh371n4
+noXBR1kaCjuRUqW2dpcTl6jX6X/PwhlC8CW3YScL+NcsbMnoW2IKwvpQGDeL
+MGlsUQZH2/TsUkzpKqf0gckGXbmMTanOncEgv3pgwGAwSQfuwIw+GfPcg7Cg
+ci4OEzlFtEYuxjKiQRub1S0i2kUbIGQBJp9UCUl2LFIvhDzh6oueims8iCYO
+iqhZY8mllLRQJc3ZniDW9YujrXFqbNQKIsGT4j/quApq
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt11EOwiAMBuAfb+KVPMISn3cGb+6EdgOnS0loefkR4WVLv7BRuvuyPpYb
+gOf2f+HTUh7S1uc0CiiggAIKKKCAAgoooIACCiiggAIKKKCAAgoooIACCiig
+gAIKKKAgWoDTGCxAvkWneAHyHdUUK4AQmilWAJynYEGJW64ftXk6BfIOjIvf
+L9A+rtkFaPsMwZ4HxqbPHsGeB6YI2jwwRQCPJ2AWQC9MDmeoRSA7cNxh1C8o
+iw+PZ2AV1NMkweA82CmQROQEMAmcXgCzAB5pqEfgk4bsAo+DwCoolZh7/CuB
+noUzBFKIalkWL9D877sJLwV7OR4Q/48gj1Efs78F7kngSuBUDfYI4HoOfYdP
+8t5p/SOesAXAsQLVERz4AI7qK1W/wPhJ0071LRIaXyoPjYr4+Fp5AI2kaW/m
+6DHQ
+      "], {{0, 0}, {129, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq1n+N+cC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL9K+l24
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw2NXGAAAQNGXa1nLtm3bdlvuZdvYL98+7J5z83Yv53eDgD//Bv7/jwEE
+GEigQQQZTLAhhBhKqGGEGU64EUT4gx9GEmkUUUYTbQwxxhJrHHHGE28CCSaS
+aBJJJpPsT36aQoqppJpGmumkm0GGmWSaRZbZZJtDjrnkmkee+eRbQIGFFFpE
+kcUUW0KJpZRaRpnllFtBhZVUWkWV1VRbQ4211FpHnfXU20CDjTTaRJPNNNtC
+i6202kab7bTbQYeddNpFl91020OPvfTaR5/99DvAgIMMOsSQwww7woijjDrG
+mOOMO8GEk0w6xZTTTDvDjLPMOsec88y7wIKLLLrEksssu8KKq6y6xprrrPuL
+X/7mtxtsuMmmW2y5zbY77LjLrnvsuc++ogcceMihRxx5zLEnnHjKqWecec65
+F1x4yaVXXHnNtTfceMutd9x5z70PPPjIo088+cyzL7z4yqtvvPnOux98+Mmn
+X3z5zbd/AfEVdvw=
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztl0tuhTAMRe3upFvqEp5Uddj9z0rBnyRIgdfcW72BEZAJ4ci/a+f98f3x
+eBORz+352h5lXtvf5ZfBxRSlKEUpSlGKUpSiFKUoRSlKUV6fIqc3g6L7p+IL
+j7J/mwuDIranW+CU/fPzAqeYq/Y95jcKRS3yYrnAohwcv4mU/iZRLDIqt+K/
+ojBN3TApXd2wKOG1y81LlN0S2zvdv2iLWnFeSOdqf5HDXTL32noXs51kiukN
+naJWnmTK8Y9/oOjUGNgMI7NkBk5KkzkAOo+5Oad/YSn+PyrFykZOBqEn2COj
+R2HDz8kxQTEppp19/RBssW7QGoOnNN2AS1EdVJpB8YTObKZQNAMjRIphQgZY
+tlgmMykSD9WWdJXEYef26P4EJbTMx9wQUmxoxAMTQ6HrNZgTqtYGCW1O9s4h
+SOiqyd7Z4MCUoXd6dC6PCM9z+t5pwgOPzdg77xwR/kLpYqI+vKOdFufCDot3
+WtduLPZ4p3nvFGdSEjpcFFcEB81x4ffX9JCwwskxKropAaPSmKSxMpQgtHlQ
+HixHY1prcg5eOt20FhwwJWPTtFGCLX4cyB6KL50YabTroXiXRUm2Mo3X6HZ2
+Uo0ZBEvRrvxjbqeoWkTdXwxRy5EwUxp0/QBtXybY
+      "], {{0, 0}, {103, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2VtWMpIRyh5lKyOyRUYRMr5H//+NB/ecG6v+FKpB4Ptv
+4D9ffvHpJx9+ULXKu++8+carr1Ss8OILzz5TtkzJEk8+8egjDz5w7z1Fi9x5
+x623FCxw4w3XXnPlFZdecuEF555z5hmnnpI3z4knHHtMzhxHHnHoIQcesO8+
+WbNkzLDnHrvusuMO226z5RabbrLhBuuukzZNyhRrrrHqKiuusOwySy6x6CIL
+LjDvPHPOMessSZMkTDDjDNNOM+UUceNMOsmEE4w7zphjxIwx6ihRo4w4wrDD
+DDnEoINEjDDgAGHD9NtPn3302kuPPXTbTcgQXXbRaScddtBuO2220WorLbbQ
+bDNNNtFoIw02UG89ddZRay1BgwQMUGMNyC8JMlNc
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNGvMrL3yswIGWVlU0JmlK2s+PDm/7/x4J5zo5WfYiUEfP8N
+/v9jgIBBgoYIWUWV1VRbQ4211BombB111lNvAw020mgTTTbTbAstttJqG222
+024HHXbSaRdddtNtDz320msffUaI2E+/Aww4yKBDDDnMsCOMGCXqKKOOMeY4
+404wYYyYk0w6xZTTTBsn7gwzzjLrHHPOM2+ChEmSLrDgIosuseQyy66wYoqU
+q6y6xprrrLvBhptsusWW22y7w4677JombYaMe+yZJes++x5w4CGH5sh5xJHH
+HHvCiaecesaZ55ybJ+8FF15yaYGCRYpeceU1195w4y233nHnPfc+8OAjj5Yo
+WabsE08+8+wLL77y6htvVqj4zrsffCj6yadffPkLcRJU9g==
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt100SwiAMBeDEm3glj9AZ172CR7dCApSOtAt5mXGetuIqH/+E+7I+lpuI
+PLf3tb0a8tlY+eBBPnny5MmTJ0+ePHny5MmTJ0+ePHny5MmTJ0+ePHny5MmT
+/0deDr9QXlMQ8SKAT1FqAeXFou0KHJ8CHQscb72eotkQYHm1aSc2EeF8roA/
+Efz+QfM2+ipXJt+cTbdZ/yH8bv3D+TIAZ2En8antFnUUeVrr1Xaf8fkz77yX
+3PMyHICZ6YbFjOJtC47j1fafKD5Hj+R11HxApiuDtQdJtL/nfqA83zugV1C8
+SzG8LX/puwB3ycoLsDsEkHe8koAH8dbvQXxNQoL4mgUG8V0KDOf9EPJhyEnR
+xRvpryqg7VlcqwOsQPM9T8qmVKBcRnxHAvqF9X/Y5resX8vRvlbX5t7MGrwB
+tzgxaA==
+      "], {{0, 0}, {128, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq1X+B+dC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL/5o11S
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw2NXHgAAgNEnW8vWWrZtLdt668m2a/98+7B7zi0MXM0HQoA//wb//49B
+BBlMsCGEGEqoYYQZTrgRRBhJpFFEGU20McQYS6xxxBlPvAkkmEiiSST5gx8m
+k2wKKaaSahppppNuBhlmkmkWWWaTbQ455pJrHnnmk28BBRZSaBFFFlPsT35a
+Qom/+GUppZZRZjnlVlBhJZVWUWU11dZQYy211lFnPfU20GAjjTbRZDPNttBi
+K6220WY77XbQYSeddtFlN9320GMvvfbRZz/9DjDgIIMOMeQww44w4iijjjHm
+OOP+5rcTTDjJpFNMOc20M8w4y6xzzDnPvAssuMiiSyy5zLIrrLjKqmusuc66
+G2y4yaZbbLnNtjvsuMuue+wZIOA++x5woOghhx5x5DHHnnDiKaeeceY5515w
+4SWXXnHlNdfecOMtt95x5z33PvDgI48+8eQzz77w4iuvvvHmO+9+8OEnn37x
+5Tff/gUVN3WU
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVElyBDEIE/lJ8qQ8Yapyzv9vmQW04Dnl3FM91bahQQiZz9vv9+0DwM/9
+/3X/V/8ei8cOrzX6XWF/+uD+Bu3m09HQ57AzBsF4YixYaZ7nTytmGR5tqxfW
+BhNltBF6iKYzsEp7ZFDAyWR7DIjSAmtfjF4WPfedj6TZC0ILhRZ3atQLoHGG
+PBLAthW5PZDSRrpOpBHDkNaOH7mCme68BOACAdvJ/iMdXJwmWZgHCSJGwxlY
+MSkDZ3KB5MRwgPorhkM4WMWeVzDmIuQi+ChLQ2EnUqrU1u7ScYl6FcsUcSsO
+j0OnmeS9ThcONrhSo6ve6f+qNerF21qrtn0DHUZU6IHChWVyW3aygGsWlhZY
++2L0sui5twnj3F2z8JqFwUdZGgo7kVKltnaXjkvUx+2/ZuEOIfiS27KTBfxr
+Fo5k9C0xBWFzKYybgzBp7KAMjnboOUsxpauc0gcmG0zlMg6luncGg/zqhQWD
+wSQduAMz+mTMew/Cgsp5c5nIKaI1cjGWEQ06sVndImJcdABCFmDySZWQZMci
+9ULIE66+mKl4jAfRxEERNWssuZSSFqpkODsniHWdhfwBTJ8Kaw==
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVEGSwjAMk/jIzn6JJzDDef9/oxRbklMue8/QTkrU2pKt+Pfxd3/cADyP
+++e4efxAvp84lw/Ggnnus9bePt8E+oNetOW3wI4GRT1XBtAvFSBq4+umxjXs
+SNE0C0Iv2mYrLLCZGWXwtJYqgcglqSbGJIfOZGJTM6b2zo0qARG1MBriMl23
+Dxi61RC1z9HdZlMrXuNZeIUTzdSlyLOPA754LWJ/91rmVtsYPjNuVy6yhjRc
+ZZEriAW2eW3q/Nhkw+ABSi0EhlssutKubunSLwVyTdXvS1WlFaqBrOT+6zID
+HbV50V0Iy7m3DSyWm/99mIZbItueTHsyRVV8fPu3J1P21N7ckymO2p5MezJl
+KOSD8D2Z/juZXmKqCQs=
+      "], {{0, 0}, {31, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPWdkruz4ZUURlrzKjrGRvEq/+/xsP7jk3Vv2pVIPA99/A
+f778omaNTz+pWuXDD9595803Xn3lxReefebJJx595MEH7r3nzjtuveXGG669
+5sorKla49JKyZS684Nxzzjzj1FNOPKFkiaJFjj3myCMKFjj0kAMP2HefPffY
+dZcdd8ibJ2eObbfZcotNN9lwg3XXWXONVVdZcYVll1lyiUUXyZolY4a0aRZc
+YN55UqaYc45ZZ0maJGGCGWeYdpq4caacYtJJJpxg3HFixhhzDJWoUSJGGHWU
+EUcYdpghhxh0kAEH6LefsGH67KPXXnrsodtuuuyi00467KDddtpso9VWWmwh
+ZIhmm2myiUYbabCBeusJGiRggDrrQH4BK5k2rA==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt182RwyAMhmEpnWxLKSEzOaeHrXwdELGNZ4kPRt/l9U+4iScCg/h5vO6P
+m5k9l/d3eV10LR3bu3uZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAABwJcAOv8kAL2GsNRJAibM2yQCLeLsmE1BCHZtMQOS+xIuByAZ4TECL
+KSkAVEJ7NID9kw+IWeB2ZhrOWoo364EIsFsPBIDPMHwLPA1Q/n/EHcWemAGP
+9Wi8M82sB6zm34bDMLcgiag6QCzMSoDHiqQD1PhagI9SkFIV2+BLTCrL/68R
+084FLQl9P3mA1pcKEMuB9WnIPJrVz7HbHHLPhp9yXQaI7MsAa5kiA6zVogzQ
+lcsCQNue2mDUwunkWfY6gm936hWUStjc30u3CYLu9nOn6WsFkXU7fp2Trj/6
+ozI/
+      "], {{0, 0}, {130, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq13+J+cC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL+cQl4e
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9VSFQAAQMFDd3dJd3c3Snc3XDh0l1Ii+uP64M5sYeB6IRAC/Pk3+P9/
+DCLIYIINIcRQQg0jzHDCjSDCSCKNIspooo0hxlhijSPOeOJNIMFEEk0iyWSS
+TSHFVFJNI8100s0gw0wyzSLLbLLNIcdccs0jzy98MZ98CyiwkEKLKLKYYkso
+sZRSyyiznHIrqLCSSquosppqa6ixllrrqLOeehtosJFGm2iymWZbaLGVVtto
+s512O+iwk0676LKbbnvosZde++izn34HGHCQQYcYcphhRxjxK1/9xjdHGXWM
+MccZd4IJJ5l0iimnmXaGGWeZdY4555l3gQUXWXSJJZdZdoUVV1l1jTXXWXeD
+DTfZdIstt9l2hx132XWPPffZN0DAAw485FDRI4485tgTTjzl1DPOPOfcCy68
+5NIrrrzm2htuvOXWO+68594HHnzk0See/M53f/DDZ5594cVXXn3jzXfe/clP
+P/jwF7/85NPf/PYv0qx4Zg==
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVNsRwjAMk1mEYyVG4I5v9v+jD1uSXdgg0JAQpbHkKH68Ps/XDcB7a/et
+IaLa9kFkX9Oxr8DZ7T/ZcUqrkG8fw9rxmDSgFiWAwAAY4lx1BRiiaCaE6jgd
+uU2BxUxoGE9pyRSQnJMqYuHkUJFErGtG116xkSkIWC6EmjgPl+OUOwbSHbZ7
+cXFqyauNied2pOm6uHM/xwaTMcka+tNrHpvHFuYz4XLlkNWk4SorYoIYsMwr
+U/vLImsGN5BqQdDcItEZdrqlUj8SpJzyvC9ZpVYwB7SSzp+PGPCq9Sd0CmY5
+nW0Bw3L9vy5Tc4tFKyXRO4r54xbzwKpMypN5jRJWZWrwqkyrMtn1H26xaKsy
+rcpkWdH1re+qTF9z7AkM
+      "], {{0, 0}, {31, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPWdkruz4ZUURlrzKjrGRvEq/+/xsP7jk3Vv2pVIPA99/A
+f778omaNTz+pWuXDD9595803Xn3lxReefebJJx595MEH7r3nzjtuveXGG669
+5sorKla49JKyZS684Nxzzjzj1FNOPKFkiaJFjj3myCMKFjj0kAMP2HefPffY
+dZcdd8ibJ2eObbfZcotNN9lwg3XXWXONVVdZcYVll1lyiUUXyZolY4a0aRZc
+YN55UqaYc45ZZ0maJGGCGWeYdpq4caacYtJJJpxg3HFixhhzDJWoUSJGGHWU
+EUcYdpghhxh0kAEH6LefsGH67KPXXnrsodtuuuyi00467KDddtpso9VWWmwh
+ZIhmm2myiUYbabCBeusJGiRggDrrQH4BK5k2rA==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVUtWxDAMk7kJHIkjzHusuf+OdhrrE3fFuvM6QxK7tqzI5vP1+/36APBz
+fL+Ob1Xxe+xQebY+1+Fp5W+ftcdyx/WJM3qc528rehkey3ae4XoblkQI3gHW
+QzQrQyP3RwYF7Ey2R4MoLbDti9HLoud+5SNp9gdCC4UWd0y6ABpnyCMBXLYi
+twMpbaRrIo0YhrT2+JErmFk3LwG4QMDr5P0jHUT2wgjD6Vgdo+EMrOiUgTO5
+QHJiOED9FcMhHKxizysY3Qi5CD7K0lDYiZQqtbW7rLhEvRXLFNEVw2PoNJPc
+63TDwQuu1OhWb9//VmvUi9taq3b7DrQZUaEDhQvL5LbZyQKeWVhaYNsXo5dF
+z71NGOfumYXPLAw+ytJQ2ImUKrW1u6y4RD26/5mFewjBl9w2O1nAv2ZhS0bv
+ElMQ1k1h3AzCpLEbyjTUhHIUQ/UVrPAsBkoEKKwBYb8V4Rj9bBjpQ55ykUMH
+dwd71OsBl93Qjd+ALEhji9nIKEKuSybu8V+ih4gcJH1/RYWVU0gPd7BOUFel
+Ay+WR8OBI8HJux0OKnwMBw0DKWMoLHr+tintykaOP/r9Cmk=
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztl02OwzAIhWFuMlfqESrNuoveX5rUAfwTyYlaP9TFi5p4ZX8FDDx+74/b
+/UdE/rb3ub2a9WwkefHykCSSSCKJJJJIIokkkkgiiSSSSCKJJJJIIonfRpTD
+F03Usk18ySGWfXVBE8X2dwuUWLYeFyjR3Fn2m2/hRLVbI3aPMog7039JxP6X
+QLRIqly6O6uqXJOXWcQuLzOI4dnTg5YRi4V2zvSshTaqFYKTsr6yP8ruUpl7
+dm1HtlMSiVbzUolqpSCRuJ+XTNSpkRAtJ7MEAanHie6B6VU383AujuhnpxEt
+LeVgKHIK2LNkLLTYuSNUZRbR6nqfn2AbrYO1RmKJTQfLI6oO3QRN9CSpGQIn
+ag2kJBENGeUnw0bLjiyixJtmY3WnxLB5eSx6kxi11UeFKPK4UIoHMgS09xUg
+M6psG1SkmVUTDEFFZmXVBA0aSBw0gUfzdBT7jNlrAit+0FiOmuDKKPYpsYuh
++mCEdGzM7t1fwDq2a5d2b7COdU0gzocnSbgxnggmkunNyj/TYWwVs0rLUAmI
+5x9Wayvg
+      "], {{0, 0}, {115, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPmRkRslVGSFb2rIwQQrJ3xquH7/+fw4N7zk1Uf8rVIPD9
+N/CfL7/49JMPP6ha5d133nzj1VdefOHZZ5584tFHHnzg3nvuvOPWW2684dpr
+Kla48oqyZS695MILzj2nZIkzzzj1lBNPKFrk2GOOPOLQQwoWOPCAfffZc49d
+d8mbJ2eOrFl23GHbbbbcYtNNNtxg3XXWXGPVVVZcYdllllxi0UUyZlhwgXnn
+mXOOWWeZcYa0aaadJmWKKaeYdJIJJ0iaZNxxxhxj1FFGHCFhgrhxYsYYdpgh
+hxh0kAEH6LefPvvotZcee4gapdtuuuyi004iRuiwg3bbCRumzTZabaXFFppt
+JmSIJptotJEGG6i3njrrqLWWoEECBqixBuQX2L9YJA==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw2U3AwAAQNFnw7Tpjunu7t400814mqn/f/jgnnMjiWQ8EQR+/gb+/zGF
+FAMEDBI0lVTTSDOddEOEzCDDTDLNIstsss0hx1xyzSPPfPINE7aAAgsptIgi
+iym2hBJLKbWMMsspt4IKK6m0iiqrqbaGGmuptY4666k3QsQGGmyk0SaabKbZ
+FlpspdU22myn3Q467KTTLrrsptseeuyl1z767KffAQYcZNAhhhxm2BFGHGXU
+McYcZ9wJJpxk0immnGbaGWacZdY55pxn3gUWXGTRJZZcZtkVVowSNUbMVVZd
+Y8111t1gw0023WLLbbbdYcdddo0Td48999n3gAMPOfSII4859oQTTzn1jDPP
+OfeCCy+59Iorr7n2hhsTJLzl1jvuFL3n3gcefOTRJ5585tkXXnzl1TfefOfd
+JEk/+PCTT7/48ptvfwHfkWQC
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVNsRwjAMk1mEYyVG4I5v9v+jLdHDCSPkSEkbJ7ZkK368Ps/XDcD7eO7H
+U6hzVPFl+j42nP+41nK6jv7mAk+MmcvXToAHOGnJu1D0Bnk1ojgdGAWtnSa0
+mt22EIQ5TOCk5SLDYSQyWytwmstIgcAlKAKrBAdGMrDOGZ07Y4/KsQoMT2uQ
+y3AsH9B4qyAqn727zIY2cLV32Yc7wUxe8tzr2MyL1sL3f61lbJWtQme2W5UT
+rUYNK62q2YjJbPFa1HnYYEPgYRRbyBhqMekRdlYLUz8lyDlVvZesiiuUA0nJ
+9dcwAl21PspVCMm5tjRMkuvfvkxNLRFtd6bdmSIrvr787c6UNbU2d2eKq7Y7
+0+5M6Qr5IvvuTEtn+gKmygkQ
+      "], {{0, 0}, {31, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPWdkruz4ZUURlrzKjrGRvEq/+/xsP7jk3Vv2pVIPA99/A
+f778omaNTz+pWuXDD9595803Xn3lxReefebJJx595MEH7r3nzjtuveXGG669
+5sorKla49JKyZS684Nxzzjzj1FNOPKFkiaJFjj3myCMKFjj0kAMP2HefPffY
+dZcdd8ibJ2eObbfZcotNN9lwg3XXWXONVVdZcYVll1lyiUUXyZolY4a0aRZc
+YN55UqaYc45ZZ0maJGGCGWeYdpq4caacYtJJJpxg3HFixhhzDJWoUSJGGHWU
+EUcYdpghhxh0kAEH6LefsGH67KPXXnrsodtuuuyi00467KDddtpso9VWWmwh
+ZIhmm2myiUYbabCBeusJGiRggDrrQH4BK5k2rA==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztl02OwzAIhWFuMlfqESrNulLvv5jUAfwTyYlaPzZ9UROv7K+Agcfv/XG7
+/4jI3/Y+t1eTng0kL1wakUACCSSQQAIJJJBAAgkkkEACCSSQQAIJ/D6gHL5g
+oJZd4ksKsGyrCxgotr1bkMCy87gggebLst0ciwaqXRixK5QA3JH+ywH2PzzQ
+oqhy6dosKm1NPiYBu3xMAIZbT89ZBSz22THTo9ZZqJb/J5V8YT+U3Z8yd+vS
+BmyH5AGt0GUC1SpAHnA/LheoUxMRqk1mmYGRiRONg9KlbuThWBjQj84CWjrK
+wUyg1N/TYyyu0Nki5GMS0Ep5n5dYC61ltSZCgU3LSgOqDv0DDPTsqKmBBmoN
+ouQAjRhFJ8FCS4skoMSbZWH1pcQweXnyeQ8Y9dTngajrsDCKBzF0sncSHDIq
+axtQoJFVAQwBBWZjVQANGQccFIBH8nTY+gjZKwCreMg4jgrgyrD1IbCLn/rs
+A/RqDObdP4B6tWuPdmWgXnUFII5HZ0f4MJ4IJBDp3ck/03FrEbJqyNAE2KfJ
+fgXmxj92wSt2
+      "], {{0, 0}, {114, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFPmRkRslVGSFb2rIwQQrJ3xqtzvv//wIN7zk1Uf8rVIPD9
+N/CfL7/49JMPP6ha5d133nzj1VdefOHZZ5584tFHHnzg3nvuvOPWW2684dpr
+Kla48oqyZS695MILzj2nZIkzzzj1lBNPKFrk2GOOPOLQQwoWOPCAfffZc49d
+d8mbJ2eOrFl23GHbbbbcYtNNNtxg3XXWXGPVVVZcYdllllxi0UUyZlhwgXnn
+mXOOWWeZcYa0aaadJmWKKaeYdJIJJ0iaZNxxxhxj1FFGHCFhgrhxYsYYdpgh
+hxh0kAEH6LefPvvotZcee4gapdtuuuyi004iRuiwg3bbCRumzTZabaXFFppt
+JmSIJptotJEGG6i3njrrqLWWoEECBqixBuQXh3dXvg==
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9VSAgAAAMET7O4uVOzuRrADA7sVPVsx/n9GH9yZDSVTiWQQ+Pkb+P/H
+NNIMEDBI0HTSzSDDTDLNIstsss0hx1xyzSPPfPItoMBCCi2iyGKKLaHEUkot
+o8xyyq2gwkoqraLKaqqtocZaaq2jznrqbaDBRhptoslmmg0RsoUWW2m1jTbD
+hG2n3Q467KTTLrrsptseeuyl1z767KffAQYcZNAhhhxm2BFGHGXUMcYcZ9wJ
+Jpxk0immnGbaGWacZdY55pxn3ggRF1gwStQYMRdZdIkll1l2hRVXWXWNNddZ
+d4MNN9l0iy3jxN1m2x123GXXPfZMkHCffQ848JBDjzjymGNPOPGUU88485xz
+L7jwkkuvuPKaa2+48ZZbkyS948577hV94MFHHn3iyWeefeHFV15948133v3g
+wxQpP/n0iy+/+fYXT7ditg==
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt11EOgjAMBuB/3sQreQQTn72DJxdHB5soaZO1ffkHbj5A+LKxtlzvz9v9
+AuCx/F74tFK7spxJjQQSSCCBBBJIIIEEEkgggQQSSCCBBBJIIIEEEkgggQQS
+SCCBBBJIIMFIwKGPJqDe0oYEAuod3RBMgBiGIZgAHIdowvrg9fppW8hIkPdg
+IsBOaOfEpidgPFMIWzyYHEgthC0e5BDGeJBDgMsiqAloFxaPjKohyEacmJns
+hHX+4bIMWkI/ZBFmR0QjQSKSl0BF8HoJ1AS4xCMLwSke6QkuSUFLWIszf8AZ
+oWXGFIJUp61SSyC0XOC8F08JW5UeAfhDqH3Yl+5vgn8wOCN4VYgWAnyT0vfz
+i7x8rSISUNwUYJ+DLiNHrsFekJXuiATsu288oglSGZfS/evaGxnlMj8=
+      "], {{0, 0}, {130, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq13+J+cC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL+cQl4e
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9VSFQAAQMFDd3dJd3c3Snc3XDh0l1Ii+uP64M5sYeB6IRAC/Pk3+P9/
+DCLIYIINIcRQQg0jzHDCjSDCSCKNIspooo0hxlhijSPOeOJNIMFEEk0iyWSS
+TSHFVFJNI8100s0gw0wyzSLLbLLNIcdccs0jzy98MZ98CyiwkEKLKLKYYkso
+sZRSyyiznHIrqLCSSquosppqa6ixllrrqLOeehtosJFGm2iymWZbaLGVVtto
+s512O+iwk0676LKbbnvosZde++izn34HGHCQQYcYcphhRxjxK1/9xjdHGXWM
+MccZd4IJJ5l0iimnmXaGGWeZdY4555l3gQUXWXSJJZdZdoUVV1l1jTXXWXeD
+DTfZdIstt9l2hx132XWPPffZN0DAAw485FDRI4485tgTTjzl1DPOPOfcCy68
+5NIrrrzm2htuvOXWO+68594HHnzk0See/M53f/DDZ5594cVXXn3jzXfe/clP
+P/jwF7/85NPf/PYv0qx4Zg==
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt10tSxDAMBFCZm3AljjBVFEvuv2NI3LLyLdvp3ikVxgyQPMayZOXz9fv1
++jCz7/fXj/0fZXkp71N5pJNOOumkk0466aSTTjrppJMO2bHDq8Sx5RoMKseW
+S8KgcKxCm0HhmB0HibPefb1gaIWOOjU2g8qEg3PwGHBse+ocz5uJ2jHkeN4I
+nW3eCB2bnrN+x/CXZbawdzl1LQ+WzglnnS6bnrVuJw5SZ6YGjDo1PZ8wfc6T
+wPQ7Np2cQ86D5Bxwpgtat7PuzRzl1kF91jm1zcBGrXJQxwjL+d7xxomlnDr4
+LIXZ3J85a/7zYnPpFG5srh1Kqbl3vKmhMnvHWniozMHBezJzdOq6ln8eR5iQ
+P2Xgkcba9FEZFEtvab22MRUwaAT9e+6cebUMBYC1fwZnH5KIU514e/b+CaTd
+GEnJ3T/B1LypMeHvn9XBA0B8Rw9NSxSo/lMus4v4syfCa8frWfgcdKUtaHP2
+8VPHKRNXGzoOvuMPtN5wCEJTiu+WrXVi7wEFZcBHQWg29cVHWQXA/dEE8MMP
+ZdOhSZImbJoeGzpT2lShRhdF1pzsm4LCGSLuRVNSOIv/762Lkqy1WM6KahEY
+tjasB0lFiz2gt4Lh13/deybY
+      "], {{0, 0}, {103, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2VtWMpIRyh5lKyOyRUYRMr5H//+NB/ecG6v+FKpB4Ptv
+4D9ffvHpJx9+ULXKu++8+carr1Ss8OILzz5TtkzJEk8+8egjDz5w7z1Fi9x5
+x623FCxw4w3XXnPlFZdecuEF555z5hmnnpI3z4knHHtMzhxHHnHoIQcesO8+
+WbNkzLDnHrvusuMO226z5RabbrLhBuuukzZNyhRrrrHqKiuusOwySy6x6CIL
+LjDvPHPOMessSZMkTDDjDNNOM+UUceNMOsmEE4w7zphjxIwx6ihRo4w4wrDD
+DDnEoINEjDDgAGHD9NtPn3302kuPPXTbTcgQXXbRaScddtBuO2220WorLbbQ
+bDNNNtFoIw02UG89ddZRay1BgwQMUGMNyC8JMlNc
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNGvMrL3yswIGWVlU0JmlK2s+PDm/7/x4J5zo5WfYiUEfP8N
+/v9jgIBBgoYIWUWV1VRbQ4211BombB111lNvAw020mgTTTbTbAstttJqG222
+024HHXbSaRdddtNtDz320msffUaI2E+/Aww4yKBDDDnMsCOMGCXqKKOOMeY4
+404wYYyYk0w6xZTTTBsn7gwzzjLrHHPOM2+ChEmSLrDgIosuseQyy66wYoqU
+q6y6xprrrLvBhptsusWW22y7w4677JombYaMe+yZJes++x5w4CGH5sh5xJHH
+HHvCiaecesaZ55ybJ+8FF15yaYGCRYpeceU1195w4y233nHnPfc+8OAjj5Yo
+WabsE08+8+wLL77y6htvVqj4zrsffCj6yadffPkLcRJU9g==
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt10ESwiAMBdDEm3glj9AZ197Bk1shgZaOtAuTv/lqxVV4hjaE+/J6LDcR
+ea7Xe70U9Fonlu/0MAEBBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAAB
+BBBAAAEEEPBPgBy+kwFawogPEECJ04dkgFi83ZAJKKGOQybAcl/i2UJkA9Ru
+QLFbEgCoBP9gAPtPPsDuApUrt2FUKd7UAxBgVw8AgLYMZ4HDAOX/W9xZ7MAM
+qNWj+c4U2Q9Izb9MlyG2IbGoOIAVZiRArSLhADU+FqCzFKR0xTJ5EpPa8t89
+Ytq5wJMwzpMH8LlQACsHMqYh82hWH8dhc8g9G7Z2HQaw7MMAvU2BAXq3CAMM
+7TIA4NuTL0ZtnC6eZf9H0O1O3UGphM37vHULIrTji9eoVEGb2H/Fp+AD+Igy
+PA==
+      "], {{0, 0}, {130, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq13+J+cC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL+cQl4e
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9VSFQAAQMFDd3dJd3c3Snc3XDh0l1Ii+uP64M5sYeB6IRAC/Pk3+P9/
+DCLIYIINIcRQQg0jzHDCjSDCSCKNIspooo0hxlhijSPOeOJNIMFEEk0iyWSS
+TSHFVFJNI8100s0gw0wyzSLLbLLNIcdccs0jzy98MZ98CyiwkEKLKLKYYkso
+sZRSyyiznHIrqLCSSquosppqa6ixllrrqLOeehtosJFGm2iymWZbaLGVVtto
+s512O+iwk0676LKbbnvosZde++izn34HGHCQQYcYcphhRxjxK1/9xjdHGXWM
+MccZd4IJJ5l0iimnmXaGGWeZdY4555l3gQUXWXSJJZdZdoUVV1l1jTXXWXeD
+DTfZdIstt9l2hx132XWPPffZN0DAAw485FDRI4485tgTTjzl1DPOPOfcCy68
+5NIrrrzm2htuvOXWO+68594HHnzk0See/M53f/DDZ5594cVXXn3jzXfe/clP
+P/jwF7/85NPf/PYv0qx4Zg==
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVVtyw0AIE71Je6QeITP97v3/miagB+sj2GMna1sBoRXk8/H7/fgA8PO8
+vp5XvQ7U/zKuWgf6KRq9AXhh+vu9jCAgBp1Oz5SiyfCzMtHwwvuIZ15Js51l
+VtOVsJaoRgxeAfokm87AKu3UCwWcTHY/iqO0wLovRi+Lnvedj6LZF8QWCi3t
+tFG93dIM+UgE+11R24Mp31Guk2nEMKa140euUKZ3XgZwg4Dbyf1HAtycZlkY
+ggKRo/EMrpiUuyGsDqQmxgP0XzEcAmAVe17RmEbIRehRlobGTqZ0qa0d0nHJ
++uh+NZP64UAcPs0k1z5dPLjBlR5d9WqGXYypPecuEPcsJE1a5p6FJLjnEw6m
+9yz0NPz9PQtH1e3TTHLt08XjnoUhmE0i3qwYYzSYNodg8tiFZBpqYnkUQ/cV
+rPAsBkoEKKwRYb8V6Zj8bBj5Q0hBBJjgDrBTvR502Q3T+EPIggy3mI2MIuba
+ZPI+/iVmiAgg6/tPVFi5hEQ4wDpBXZUAbiwfHQDyqhHjAFAhTUEH/AFQxApf
+
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVFtyw0AIE71Je6QeITP97v3/miagB+sj2BPHu2sMQgg+H7/fjw8AP8/7
+63nXXKj/Xdy1LvQp2nob4GXTz/cynIA26HA6U4gGw//KQIML7yvOPJNGO8vM
+pjNhLpGNELwc9I9oOgKztJ9eyOFEsj0GRGmBtS96L/Oe+45H0uwBoYVcizsV
+qsstzpBHAtjvitweSPmOdJ1Iw4chre0/YgUzXXkJwAUClpP1Rxq4OE2y2QoV
+eANnYMWE3A1heSA5MRyg/oruEAaWsccVjGmEXAQfZWEo7ERKldraTdovUR/d
+r2ZSPxwWh04zyLVOFw4WuFKjK1/NsIsxtefchcU9CwmTkrlnIQHu+YQD6T0L
+PQy/v2fhsLp1mkGudbpw3LMwCLNJxM3yMUKDcXMQJo0dlMHRDj1nKqZ0pVP6
+wGSDyVwvh1L1ncEgv3pgwaAzSQduwIg+GbPvQVhQOhfNRE4RpZGJsYwo0InN
+8hYRY6IDELIAk0+qhCQ7FqkXQp5w9cVMxS2QqQcVdzadJhxk8AddIwpf
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt10ESgjAMBdDEm3glj8CMa0/g3cU2aQG1sCA/48xXsK7ybKRNep0et+ki
+Ivf5fs634l+zKW85A6dNmzZt2rRp06ZNmzZt2rRp06ZNmzZt2rRp06ZNm/Zf
+2fLxibO1RBAf0HYJ0QecLRZqNYDsEuVzANmW7BLKMg+01Z4zsScPa1fdL7i9
+vqC2/eMqR562gD11sc7x9mqdY+2W972YEXaZtYUchY2Zt9oWMy4sQfVbasJl
+mPew3sECpti2wybZaptMil1Dp9k6mnh0nyqDZRbfI//u3xD9uU99S0BsZxJs
+W+aynTzoTFTX2maDh53HWu+cYVu6M+zeUWTYvZPLsDcNLNb26uLZr+3NwaPj
+Kbouy2v/LSh98d7vrc7X2wnCtx0U3kz/Bpz40vST89daF6x7Z/W11sXr6oXu
+yNH5fL3dCuS73mtdhPMCdugwIA==
+      "], {{0, 0}, {125, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq0n+N+dC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL8Fy1wg
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw8NyJQAAAMGJbdu2bdv2Sya2ud+eHLaruihwtxwIAf79Df7/j0EEGUyw
+IYQYSqhhhBlOuBFEGEmkUUQZTbQxxBhLrHHEGU+8CSSYSKJJJJlMsimkmEqq
+aaSZTroZZJhJpllkmU22OeSYS6555JlPvgUUWEihRRRZTLEllFhKqWWUWU65
+FVRYSaVVVFlNtTXUWEutddRZT70NNNhIo0002UyzLbTYSqtttNlOux102Emn
+XXTZTbc99NhLr3302U+/Aww4yKBDDDnMsCOMOMqoY4w5zrgTTDjJpFNMOc20
+M8w4y6xzzDnPvAssuMiiSyy5zLIrrLjKqmusuc66G2y4yaZbbLnNtjvsuMuu
+e+y5z74HHHjIoUccGSDgMceecKLoKaeeceY5515w4SWXXnHlNdfecOMtt95x
+5z33PvDgI48+8eQzz77w4iuvvvHmO+9+8OEnn37x5Tff/vDjL6MccWg=
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJyF0kFOAzEQRFGbm7DiPhwhEmvuv2MSTzvurl8NAikixWf84s/H7/fjY4zx
+c/18XT9zXt9zPF89X5Sv19vx3hpO3K3J2q5fwOysjTWJrq+NFdPe8f/SMWzt
+/VS0qk8fT+dr96496fzHd590D8njPGnne9S8b6l53+TmfPFT7z+FxjfVOt+j
+5n3Pk858En9S65trjW+uGd/qZn2rW+x9rfM9a9Y31xrf46R72N233jfVnK/U
+nG9xY19wi72vWd9S876p5nzzSfewu2+Nb61Z31pDX3UzvuoWe1/zvrlmfGvN
++qaT7mF33zrfUmNfqLGvuJEvusXe14yv1JxvqbFvPekedvfN+mrN+GoNfMkN
+fckt9r7mfGsNfbVmfMtJ97C7b95XauSLNfIFN/U1brH3NfSFGvtKjXz1pHvY
+3TfjSzX0pZr4shv4slvsfY19tQa+VENfOekedvfN+UJNfU1NfdGt+lq32Psa
++GKNfKGmvnTSPezuG/pyDXy5Vnydm/g6t9j7GvlSTXxNLXavp9yPKrH3bt6n
+vv/mDyYdDRo=
+      "], {{0, 0}, {39, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2VvJLjL6lIyyV2WEsrM3iVf//40H95wbr/5UqkHg+2/g
+P19+UbPGp59UrfLhB+++8+Ybr77y4gvPPvPkE48+8uAD995z5x233nLjDdde
+c+UVFStcesmFF5x7zplnnHrKiScce0zZMiVLHHnEoYcceEDRIvvus+ceu+6y
+4w4FC+TNkzPHtttsucWmm2y4wbrrrLnGqqusuMKyyyy5xKKLZM2SMcOCC8w7
+z5xzzDpL2jQzzpAyRdIk006jkjDBlFNMOsmEE4w7Ttw4Y44x6igxY0SNMuII
+ww4z5BCDDjLgAP3202cfESP02kvYMCFD9NhDt9102UWnnXTYQbvttNlGq620
+2EKzzTTZRKONNNhAvfUEDRIwQJ11IL+19znc
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}, {{35, 0}, {35, 101}}, {{36, 0}, {36, 
+         101}}, {{37, 0}, {37, 101}}, {{38, 0}, {38, 101}}, {{39, 0}, {39, 
+         101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt10ESwiAMBdDEm3glj9AZ1z2DN7dCApSOtAv5cfG1FVd5KVAI92V9LDcR
+eW73a7s15rO58tGjEqBPnz59+vTp06dPnz59+vTp06dPnz59+vTp06dPnz59
++vT/zJfDL9bXFEW8ifBTmNpgfbFwuwbop0jHBuhbx6dwNgpgX23uic1GvJ8z
+8CvE319w32aAypUZOGn9bdaBGH+3DuD9MgZncWf56ekt7Cj0vOdXW4bGm9HE
+/V9y58twDKbWHxY0zLfVONBXW4jC/Bw+1NdRByDqXxm8gpj6+3s9iKr/vQt6
+BuY7FeTbMiB9JwDPX/k97DYE6Pmv1OVRvnV9lF+rkii/VoZRflcY433fkXwk
+cpl08bj6swy03ZprPsgMmu95nTYng3JK8aUJmUBx/R+4A1rXT+2TE3gDw1Qx
+0A==
+      "], {{0, 0}, {129, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq1n+N+cC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL9K+l24
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw2NXGAAAQNGXa1nLtm3bdlvuZdvYL98+7J5z83Yv53eDgD//Bv7/jwEE
+GEigQQQZTLAhhBhKqGGEGU64EUT4gx9GEmkUUUYTbQwxxhJrHHHGE28CCSaS
+aBJJJpPsT36aQoqppJpGmumkm0GGmWSaRZbZZJtDjrnkmkee+eRbQIGFFFpE
+kcUUW0KJpZRaRpnllFtBhZVUWkWV1VRbQ4211FpHnfXU20CDjTTaRJPNNNtC
+i6202kab7bTbQYeddNpFl91020OPvfTaR5/99DvAgIMMOsSQwww7woijjDrG
+mOOMO8GEk0w6xZTTTDvDjLPMOsec88y7wIKLLLrEksssu8KKq6y6xprrrPuL
+X/7mtxtsuMmmW2y5zbY77LjLrnvsuc++ogcceMihRxx5zLEnnHjKqWecec65
+F1x4yaVXXHnNtTfceMutd9x5z70PPPjIo088+cyzL7z4yqtvvPnOux98+Mmn
+X3z5zbd/AfEVdvw=
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJzt2E0OgjAQBeBXb+KVPAKJa0/g3cUyU4oIaZPp08VDoBvIB4X5wev0uE0X
+APd5e+K9pLxL88pfpEuXLl26dOnSpUuXLl26dOnSpUuXLl26dOnSpUuXLv0/
+dOz2RB35FB+4OvIZ1cDTYfxm4OnAfiDqi7kcHxEknbo98xi7X/c1ZmnXsV3Z
+eonzuLTYo5c4p+vbOKfriJ71Zh1+YAquhS26RVlMYenXlwlH9Ly36vXwAz0w
+v3XqlmQG4E36gAferCM6xfTo8SmmXY9O7K360j0Ntc90r2ls3ZpGb6W4uufz
+cYF2qpeWebB9oOc948Pyuz40yM/0Ad1bj45hNeWTTvaOed9i10K5cax3XpVR
+0qSvHVOqfiQ7eUqpvhNotnUNLoJne/2y6l1fBUMvcw1/74jP294u1BHHoss/
+TiDbyfN3VUMP7BemwDAg
+      "], {{0, 0}, {125, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw9c6AgAAgNFfmRkRslVGSFb2rIwQQrJ3xq0n+N+dC+f7TqL6U64Gge+/
+gf98+cWnn3z4QdUq777z5huvvvLiC88+8+QTjz7y4AP33nPnHbfecuMN115T
+scKVV5Qtc+klF15w7jklS5x5xqmnnHhC0SLHHnPkEYceUrDAgQfsu8+ee+y6
+S948OXNkzbLjDttus+UWm26y4QbrrrPmGquusuIKyy6z5BKLLpIxw4ILzDvP
+nHPMOsuMM6RNM+00KVNMOcWkk0w4QdIk444z5hijjjLiCAkTxI0TM8awwww5
+xKCDDDhAv/302UevvfTYQ9Qo3XbTZReddhIxQocdtNtO2DBtttFqKy220Gwz
+IUM02USjjTTYQL311FlHrbUEDRIwQI01IL8Fy1wg
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw8NyJQAAAMGJbdu2bdv2Sya2ud+eHLaruihwtxwIAf79Df7/j0EEGUyw
+IYQYSqhhhBlOuBFEGEmkUUQZTbQxxBhLrHHEGU+8CSSYSKJJJJlMsimkmEqq
+aaSZTroZZJhJpllkmU22OeSYS6555JlPvgUUWEihRRRZTLEllFhKqWWUWU65
+FVRYSaVVVFlNtTXUWEutddRZT70NNNhIo0002UyzLbTYSqtttNlOux102Emn
+XXTZTbc99NhLr3302U+/Aww4yKBDDDnMsCOMOMqoY4w5zrgTTDjJpFNMOc20
+M8w4y6xzzDnPvAssuMiiSyy5zLIrrLjKqmusuc66G2y4yaZbbLnNtjvsuMuu
+e+y5z74HHHjIoUccGSDgMceecKLoKaeeceY5515w4SWXXnHlNdfecOMtt95x
+5z33PvDgI48+8eQzz77w4iuvvvHmO+9+8OEnn37x5Tff/vDjL6MccWg=
+         "]],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}], ",", 
+   GraphicsBox[{RasterBox[CompressedData["
+1:eJztVUtWxDAMk7kJHIkjzHusuf+OthPr43TFuvNmaNq4sqzI5vP1+/36APBz
+/L6OX52f8++5xHuNdeUHjMFxBfctZkFhPYc9Iwg6Eko8Ii4WV5peRsTaqzfX
+RQZ6vyEvgPUlm5WBVdpXGwLsTHaPJlFaYNwX0cvQ837lo2h2gdhC0NJOB/Um
+aJohH4ng2itquzHlHuXamQaGMa2JH7lCmXXyMoAbBDxOnj8ywM1ploVFUCBy
+NJ7BFZ0yeKYWSE2MB+i/IhwiwCr2vKLRjZCL0KMsDY2dTOlSW3vIwiXrUSxT
+RFdsEZtPM8m9TwcPHnClR0e9ff6j1qgXt7VWzf1JtBVRoRsLN5bZbexTBTyz
+sLTAuC+il6HnvU0Y1+6Zhc8sDD3K0tDYyZQutbWHLFyy3rr/mYUTQvRlt7FP
+FfCvWdiW0bvkFIJ1U5g2m2Dy2I1kGmpiuRVD9xWs8CwGSgQI1oiw34p0TH42
+jPyhSIUooME9wL7q9aDLbujGb0IG0txiNhJFzHXI5L39l+ghogBZ319RYeUS
+MsIDrBPUVRnAg+WjLYAjwcW7HQ4qfBsOGgZyxuaw6PmR4w9AIApr
+      "], {{0, 0}, {34, 101}}, {0, 1}], {
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[LineBox[CompressedData["
+1:eJwtw1c3AgAAgNFP2ZtkF32IEip7lRVlJnuTePX/33hwz7mx6k+lGgS+/wb+
+8+UXNWt8+knVKh9+8O47b77x6isvvvDsM08+8egjDz5w7z133nHrLTfecO01
+V15RscKll5Qtc+EF555z5hmnnnLiCcceU7JE0SJHHnHoIQULHHjAvvvsuceu
+u+y4Q948OXNsu82WW2y6yYYbrLvOmmususqKKyy7zJJLLLpI1iwZM6RNs+AC
+884z5xwpU8w6S9IkCRPMOMO008SNM+UUk04y4QQqMWOMO86YY0SNEjHCqKOM
+OMKwwww5xKCDDDhAv/2EDdNnHyFD9NpLjz10202XXXTaSYcdtNtOm2202kqL
+LTTbTJNNNNpIgw3UW0/QIAED1FkH8gsfgDfe
+         "]],
+        Antialiasing->False]}, 
+      {LightDarkSwitched[
+        GrayLevel[
+         Rational[2, 3]], 
+        GrayLevel[
+         Rational[1, 3]]], Opacity[0.1], 
+       StyleBox[
+        LineBox[{{{0, 0}, {0, 101}}, {{1, 0}, {1, 101}}, {{2, 0}, {2, 
+         101}}, {{3, 0}, {3, 101}}, {{4, 0}, {4, 101}}, {{5, 0}, {5, 101}}, {{
+         6, 0}, {6, 101}}, {{7, 0}, {7, 101}}, {{8, 0}, {8, 101}}, {{9, 0}, {
+         9, 101}}, {{10, 0}, {10, 101}}, {{11, 0}, {11, 101}}, {{12, 0}, {12, 
+         101}}, {{13, 0}, {13, 101}}, {{14, 0}, {14, 101}}, {{15, 0}, {15, 
+         101}}, {{16, 0}, {16, 101}}, {{17, 0}, {17, 101}}, {{18, 0}, {18, 
+         101}}, {{19, 0}, {19, 101}}, {{20, 0}, {20, 101}}, {{21, 0}, {21, 
+         101}}, {{22, 0}, {22, 101}}, {{23, 0}, {23, 101}}, {{24, 0}, {24, 
+         101}}, {{25, 0}, {25, 101}}, {{26, 0}, {26, 101}}, {{27, 0}, {27, 
+         101}}, {{28, 0}, {28, 101}}, {{29, 0}, {29, 101}}, {{30, 0}, {30, 
+         101}}, {{31, 0}, {31, 101}}, {{32, 0}, {32, 101}}, {{33, 0}, {33, 
+         101}}, {{34, 0}, {34, 101}}}],
+        Antialiasing->False]}}},
+    Frame->False,
+    FrameLabel->{None, None},
+    FrameTicks->{{None, None}, {None, None}},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    Method->{
+     "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
+      "DefaultGraphicsInteraction" -> {
+       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+        "Effects" -> {
+         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+          "Droplines" -> {
+           "freeformCursorMode" -> True, 
+            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+      "DefaultPlotStyle" -> Automatic}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.9896736645945673`*^9, {3.989673702812829*^9, 3.989673708082135*^9}, {
+   3.9896738320829678`*^9, 3.989673857519796*^9}},
+ CellLabel->
+  "Out[200]=",ExpressionUUID->"da4ff068-57df-4eaa-b11e-22a36b0dc406"]
+}, Open  ]]
+},
+WindowSize->{967.5, 582.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>0.8 Inherited,
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"605dbdbe-6620-418b-a9d1-f2fced86c3db"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 195, 7, 62, "Text",ExpressionUUID->"c0d4cb32-6a43-4b49-bd89-aa64641cf186"],
+Cell[752, 29, 3984, 86, 277, "Input",ExpressionUUID->"94b6ce18-3d54-49c9-8f07-b8802676d666"],
+Cell[CellGroupData[{
+Cell[4761, 119, 687, 16, 41, "Input",ExpressionUUID->"3973df75-464e-4908-b9a4-9d6b5443246a"],
+Cell[5451, 137, 288, 6, 26, "Output",ExpressionUUID->"9ceb610c-2193-40e0-aa50-ce500f7728ba"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5776, 148, 283, 7, 25, "Input",ExpressionUUID->"76ebd601-2832-415d-aa35-beb133905351"],
+Cell[6062, 157, 265, 6, 26, "Output",ExpressionUUID->"0dfae359-6514-4ba3-b28f-b393cab97644"]
+}, Open  ]],
+Cell[6342, 166, 1397, 30, 115, "Input",ExpressionUUID->"382a1460-22c8-4050-8f4d-43e189cab34f"],
+Cell[7742, 198, 130, 3, 23, "Input",ExpressionUUID->"1747cfbf-bd76-44d4-90b1-9a7470c17b3f"],
+Cell[7875, 203, 8606, 186, 528, "Input",ExpressionUUID->"0952ae3b-50cd-4a00-ad47-16c906391ef4"],
+Cell[16484, 391, 432, 11, 25, "Input",ExpressionUUID->"0cb0a572-bccf-4f3a-8d40-84feab847e0b"],
+Cell[CellGroupData[{
+Cell[16941, 406, 265, 5, 23, "Input",ExpressionUUID->"44c90f48-100a-4b8a-94cc-edb96da591bc"],
+Cell[17209, 413, 307, 5, 26, "Output",ExpressionUUID->"7682c21a-d1a9-43e4-af88-4ebd6e2ae266"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17553, 423, 750, 14, 23, "Input",ExpressionUUID->"6c9d1c83-ddfd-4fef-add6-1418b8f0b756"],
+Cell[18306, 439, 623, 9, 26, "Output",ExpressionUUID->"aef06dad-d1cf-4737-8b22-f2916a46f4ba"]
+}, Open  ]],
+Cell[18944, 451, 152, 3, 23, "Input",ExpressionUUID->"51d2fc4e-68f5-494b-bdd9-7b642d4858e2"],
+Cell[CellGroupData[{
+Cell[19121, 458, 711, 15, 25, "Input",ExpressionUUID->"7c8f90e2-e3eb-4f96-9f85-4be711b9f8ca"],
+Cell[19835, 475, 122738, 2634, 1182, "Output",ExpressionUUID->"da4ff068-57df-4eaa-b11e-22a36b0dc406"]
+}, Open  ]]
+}
+]
+*)
+

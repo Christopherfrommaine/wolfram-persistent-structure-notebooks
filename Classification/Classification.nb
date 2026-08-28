@@ -1,0 +1,125 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      3651,        117]
+NotebookOptionsPosition[      2381,         85]
+NotebookOutlinePosition[      2780,        101]
+CellTagsIndexPosition[      2737,         98]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Classification", "Section",
+ CellChangeTimes->{{3.991319161944976*^9, 
+  3.9913191638868227`*^9}},ExpressionUUID->"cb114ae4-37fd-43d9-9579-\
+52013e9b8f05"],
+
+Cell[CellGroupData[{
+
+Cell["Class 1:", "Subsection",
+ CellChangeTimes->{{3.991319176254878*^9, 
+  3.9913191778801327`*^9}},ExpressionUUID->"52fd9afd-242b-4158-924f-\
+40caf53452a0"],
+
+Cell["\<\
+Almost all initial conditions stabilize to the same state. (e.g. all on, all \
+off, all alternating)\
+\>", "Text",
+ CellChangeTimes->{{3.9913191835221663`*^9, 
+  3.991319214191144*^9}},ExpressionUUID->"9b6fc13b-27f4-431f-a68d-\
+fcbe318ad428"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Class 2:", "Subsection",
+ CellChangeTimes->{{3.991319215907607*^9, 
+  3.991319216828624*^9}},ExpressionUUID->"35c09fc0-25b4-490c-97ff-\
+2a62f6013ea3"],
+
+Cell["\<\
+Almost all initial conditions stabilize to a small set of simple structures.\
+\>", "Text",
+ CellChangeTimes->{{3.991319246903644*^9, 
+  3.991319265268009*^9}},ExpressionUUID->"c665c67f-bf46-4a7f-8fb8-\
+44dd1be62318"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Class 3:", "Subsection",
+ CellChangeTimes->{{3.991319267960112*^9, 
+  3.991319268930902*^9}},ExpressionUUID->"000a146a-15e4-49f1-bd8e-\
+7c918d3d2145"],
+
+Cell["Much small-scale structure, but highly random.", "Text",
+ CellChangeTimes->{{3.99131927699759*^9, 
+  3.9913192886686363`*^9}},ExpressionUUID->"8225bfb9-c43c-451b-b2c6-\
+274de65c90bc"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Class 4:", "Subsection",
+ CellChangeTimes->{{3.9913192908658667`*^9, 
+  3.99131929195226*^9}},ExpressionUUID->"744c4998-47b3-44f3-9140-\
+feb3bd6979ed"],
+
+Cell["Mixture of order and randomness.", "Text",
+ CellChangeTimes->{{3.991319300868569*^9, 
+  3.991319306480144*^9}},ExpressionUUID->"53e58a73-f1c6-4be7-bff1-\
+578075baa0af"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{606, 542.25},
+WindowMargins->{{180.75, Automatic}, {21.75, Automatic}},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"2f11b2f1-3c96-4b3a-8c9a-f089b12a3706"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 161, 3, 65, "Section",ExpressionUUID->"cb114ae4-37fd-43d9-9579-52013e9b8f05"],
+Cell[CellGroupData[{
+Cell[762, 29, 158, 3, 53, "Subsection",ExpressionUUID->"52fd9afd-242b-4158-924f-40caf53452a0"],
+Cell[923, 34, 252, 6, 55, "Text",ExpressionUUID->"9b6fc13b-27f4-431f-a68d-fcbe318ad428"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1212, 45, 156, 3, 53, "Subsection",ExpressionUUID->"35c09fc0-25b4-490c-97ff-2a62f6013ea3"],
+Cell[1371, 50, 226, 5, 33, "Text",ExpressionUUID->"c665c67f-bf46-4a7f-8fb8-44dd1be62318"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1634, 60, 156, 3, 53, "Subsection",ExpressionUUID->"000a146a-15e4-49f1-bd8e-7c918d3d2145"],
+Cell[1793, 65, 189, 3, 33, "Text",ExpressionUUID->"8225bfb9-c43c-451b-b2c6-274de65c90bc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2019, 73, 157, 3, 53, "Subsection",ExpressionUUID->"744c4998-47b3-44f3-9140-feb3bd6979ed"],
+Cell[2179, 78, 174, 3, 33, "Text",ExpressionUUID->"53e58a73-f1c6-4be7-bff1-578075baa0af"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

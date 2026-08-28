@@ -1,0 +1,134 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      4427,        126]
+NotebookOptionsPosition[      3634,        104]
+NotebookOutlinePosition[      4033,        120]
+CellTagsIndexPosition[      3990,        117]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Lifetime", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"seen", "=", 
+       RowBox[{"CreateDataStructure", "[", "\"\<HashSet\>\"", "]"}]}], ",", 
+      " ", 
+      RowBox[{"o", "=", "n"}], ",", " ", 
+      RowBox[{"count", "=", "0"}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"While", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"seen", "[", 
+        RowBox[{"\"\<Insert\>\"", ",", " ", "o"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"count", "++"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"o", "=", 
+         RowBox[{
+          RowBox[{"CellularAutomaton", "[", 
+           RowBox[{"{", 
+            RowBox[{"20", ",", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", "1"}], "}"}], ",", "2"}], "}"}], "]"}], "[", 
+          "o", "]"}]}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"AllMatch", "[", 
+        RowBox[{"o", ",", " ", "0"}], "]"}], ",", "count", ",", " ", 
+       "Infinity"}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.988468837108348*^9, 3.988468898934161*^9}, {
+  3.988468935160046*^9, 3.988468952765798*^9}, {3.9884690062154512`*^9, 
+  3.988469114120347*^9}, {3.988469145117363*^9, 3.988469152063401*^9}},
+ CellLabel->"In[19]:=",ExpressionUUID->"aecb1bec-bde0-49d0-9094-781c11e01aca"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CellularAutomaton", "[", 
+   RowBox[{"{", 
+    RowBox[{"20", ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", "2"}], "}"}], "]"}], "[", 
+  RowBox[{"{", 
+   RowBox[{
+   "0", ",", " ", "0", ",", " ", "1", ",", "0", ",", "1", ",", "1", ",", "1", 
+    ",", "1", ",", "0", ",", "1", ",", " ", "0", ",", " ", "0"}], "}"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.98846880914869*^9, 3.988468809148738*^9}, {
+  3.988468901182704*^9, 3.988468928320043*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"c75af6e2-805f-4de0-8428-858a21749f18"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0", ",", "0", ",", "1", ",", "0", ",", "1", ",", "1", ",", "1", ",", "1", ",",
+    "0", ",", "1", ",", "0", ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.988468809906776*^9, {3.988468901656152*^9, 3.988468928740394*^9}},
+ CellLabel->"Out[5]=",ExpressionUUID->"8020c8de-1330-46b5-a43e-5626c8349be4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Lifetime", "[", 
+  RowBox[{"{", 
+   RowBox[{
+   "0", ",", " ", "0", ",", " ", "1", ",", "0", ",", "1", ",", "0", ",", "1", 
+    ",", "1", ",", "0", ",", "1", ",", " ", "0", ",", " ", "0"}], "}"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.98846912726729*^9, 3.988469158413121*^9}},
+ CellLabel->"In[21]:=",ExpressionUUID->"be9c05d4-9a1f-4433-b77e-b18d4b93160e"],
+
+Cell[BoxData["6"], "Output",
+ CellChangeTimes->{{3.988469129524055*^9, 3.9884691587497807`*^9}},
+ CellLabel->"Out[21]=",ExpressionUUID->"06ed18b2-fc94-49f7-a063-126953cff5c6"]
+}, Open  ]]
+},
+WindowSize->{606, 542.25},
+WindowMargins->{{180.75, Automatic}, {21.75, Automatic}},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"5a9df60a-5bdc-422c-8f29-6cecf4ee5ab0"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 1506, 37, 202, "Input",ExpressionUUID->"aecb1bec-bde0-49d0-9094-781c11e01aca"],
+Cell[CellGroupData[{
+Cell[2085, 61, 582, 14, 53, "Input",ExpressionUUID->"c75af6e2-805f-4de0-8428-858a21749f18"],
+Cell[2670, 77, 349, 7, 33, "Output",ExpressionUUID->"8020c8de-1330-46b5-a43e-5626c8349be4"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3056, 89, 384, 8, 30, "Input",ExpressionUUID->"be9c05d4-9a1f-4433-b77e-b18d4b93160e"],
+Cell[3443, 99, 175, 2, 33, "Output",ExpressionUUID->"06ed18b2-fc94-49f7-a063-126953cff5c6"]
+}, Open  ]]
+}
+]
+*)
+

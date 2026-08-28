@@ -1,0 +1,66 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      1290,         56]
+NotebookOptionsPosition[       943,         42]
+NotebookOutlinePosition[      1335,         58]
+CellTagsIndexPosition[      1292,         55]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Code 20 is best?Origin of Life : -results in
+
+Genetic algorithm?NKS 297
+code 1329
+
+not just code 20, other codes for lifelike systems
+
+
+String Rewrite : Nonlinear growth rate
+
+
+
+
+Lifetime maximization of hypergraph rewrites
+
+Tuesday 2 pm\
+\>", "Text",
+ CellChangeTimes->{{3.9888044506298*^9, 
+  3.988804452292461*^9}},ExpressionUUID->"b87abac4-fbce-4d2c-bf0c-\
+c9085e0e7364"]
+},
+WindowSize->{967.5, 582.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"0f8472d7-ac70-4336-9e02-752f84d47941"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 385, 20, 361, "Text",ExpressionUUID->"b87abac4-fbce-4d2c-bf0c-c9085e0e7364"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

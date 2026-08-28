@@ -1,0 +1,66 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      1732,         56]
+NotebookOptionsPosition[      1205,         40]
+NotebookOutlinePosition[      1597,         56]
+CellTagsIndexPosition[      1554,         53]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Boolean Minimization (Resource Function? LLMs?)", "Text",
+ CellChangeTimes->{{3.99260599101178*^9, 
+  3.992605999661776*^9}},ExpressionUUID->"c48b7664-c4d7-4d18-b720-\
+823b822f6aa5"],
+
+Cell["\<\
+Do a long run for a lot of rules (more interesting than a glider gun, and \
+interesting stuff only *rarely*)\
+\>", "Text",
+ CellChangeTimes->{{3.992605968998893*^9, 3.992606009950403*^9}, {
+  3.992606296738096*^9, 
+  3.992606297780686*^9}},ExpressionUUID->"77add5b3-4ca4-4be3-9bae-\
+1d82029c44d2"],
+
+Cell[BoxData[
+ RowBox[{"(", ")"}]], "Input",
+ CellChangeTimes->{
+  3.992606299093417*^9},ExpressionUUID->"0c47d0a5-dcbd-47e1-a1af-\
+ed1c53414c90"]
+},
+WindowSize->{967.5, 582.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"335e8e3d-680a-4cdd-a6eb-f106be12b053"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 188, 3, 33, "Text",ExpressionUUID->"c48b7664-c4d7-4d18-b720-823b822f6aa5"],
+Cell[745, 25, 307, 7, 33, "Text",ExpressionUUID->"77add5b3-4ca4-4be3-9bae-1d82029c44d2"],
+Cell[1055, 34, 146, 4, 29, "Input",ExpressionUUID->"0c47d0a5-dcbd-47e1-a1af-ed1c53414c90"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

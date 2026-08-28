@@ -1,0 +1,259 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     10250,        249]
+NotebookOptionsPosition[      8513,        213]
+NotebookOutlinePosition[      8905,        229]
+CellTagsIndexPosition[      8862,        226]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<OpenCLLink`\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.990633348669387*^9, 3.9906333552951403`*^9}},
+ CellLabel->"In[32]:=",ExpressionUUID->"e4037b0b-76fb-46be-a61a-8d080f11a791"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetDelayed", "write", 
+   "\"Tag \\!\\(\\*RowBox[{\\\"NVCCCompiler\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"NVCCCompiler\\\", \\\"[\\\", \\\"\\\\\\\"Available\\\\\\\
+\"\\\", \\\"]\\\"}]\\) is Protected.\"", 2, 32, 3, 17033013254953527958, 
+   "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{3.990633356591257*^9},
+ CellLabel->
+  "During evaluation of \
+In[32]:=",ExpressionUUID->"7ecf8330-c7c3-4178-b3e0-a6195bf102c4"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetDelayed", "write", 
+   "\"Tag \\!\\(\\*RowBox[{\\\"NVCCCompiler\\\"}]\\) in \
+\\!\\(\\*RowBox[{RowBox[{\\\"NVCCCompiler\\\", \\\"[\\\", \
+\\\"\\\\\\\"Name\\\\\\\"\\\", \\\"]\\\"}], \\\"[\\\", \\\"]\\\"}]\\) is \
+Protected.\"", 2, 32, 4, 17033013254953527958, "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{3.9906333567578897`*^9},
+ CellLabel->
+  "During evaluation of \
+In[32]:=",ExpressionUUID->"0fbd1a25-cd4a-45b5-b381-b015f240bac0"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetDelayed", "write", 
+   "\"Tag \\!\\(\\*RowBox[{\\\"NVCCCompiler\\\"}]\\) in \
+\\!\\(\\*RowBox[{RowBox[{\\\"NVCCCompiler\\\", \\\"[\\\", \
+\\\"\\\\\\\"Installations\\\\\\\"\\\", \\\"]\\\"}], \\\"[\\\", \\\"]\\\"}]\\) \
+is Protected.\"", 2, 32, 5, 17033013254953527958, "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{3.990633356771935*^9},
+ CellLabel->
+  "During evaluation of \
+In[32]:=",ExpressionUUID->"82fd211e-ea84-4acb-8721-51525c229f03"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"SetDelayed\\\", \
+\\\"::\\\", \\\"write\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 32, 6, 17033013254953527958, "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{3.990633356794553*^9},
+ CellLabel->
+  "During evaluation of \
+In[32]:=",ExpressionUUID->"5c3cf279-91dd-4d93-a72c-f70cb478b12c"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Set", "write", 
+   "\"Tag \\!\\(\\*RowBox[{\\\"NVCCCompiler\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"Options\\\", \\\"[\\\", \\\"NVCCCompiler\\\", \
+\\\"]\\\"}]\\) is Protected.\"", 2, 32, 7, 17033013254953527958, "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{3.9906333568211317`*^9},
+ CellLabel->
+  "During evaluation of \
+In[32]:=",ExpressionUUID->"5995cdd6-081b-4455-b19c-ed170d627d76"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Table", "iterb", 
+   "\"Iterator \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"CCompilerDriver`CCompilerDriverRegistry`Private`installation\\\", \
+\\\",\\\", RowBox[{RowBox[{\\\"NVCCCompiler\\\", \\\"[\\\", \
+\\\"\\\\\\\"Installations\\\\\\\"\\\", \\\"]\\\"}], \\\"[\\\", \\\"]\\\"}]}], \
+\\\"}\\\"}]\\) does not have appropriate bounds.\"", 2, 32, 8, 
+   17033013254953527958, "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{3.9906333569220047`*^9},
+ CellLabel->
+  "During evaluation of \
+In[32]:=",ExpressionUUID->"4c36f455-9fae-4d41-a004-8cbf7a715f6c"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Table", "iterb", 
+   "\"Iterator \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"CCompilerDriver`CCompilerDriverRegistry`Private`installation\\\", \
+\\\",\\\", RowBox[{RowBox[{\\\"NVCCCompiler\\\", \\\"[\\\", \
+\\\"\\\\\\\"Installations\\\\\\\"\\\", \\\"]\\\"}], \\\"[\\\", \\\"]\\\"}]}], \
+\\\"}\\\"}]\\) does not have appropriate bounds.\"", 2, 32, 9, 
+   17033013254953527958, "Local"},
+  "MessageTemplate",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{3.990633356953146*^9},
+ CellLabel->
+  "During evaluation of \
+In[32]:=",ExpressionUUID->"5ddf85fa-13cd-4185-80b1-3f9d6cfd4e59"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NVCCCompiler", "shdw", 
+   "\"Symbol \\!\\(\\*RowBox[{\\\"\\\\\\\"NVCCCompiler\\\\\\\"\\\"}]\\) \
+appears in multiple contexts \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"\\\\\\\"CUDALink`NVCCCompiler`\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\
+\"CUDALink`\\\\\\\"\\\"}], \\\"}\\\"}]\\); definitions in context \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"CUDALink`NVCCCompiler`\\\\\\\"\\\"}]\\) may \
+shadow or be shadowed by other definitions.\"", 2, 32, 10, 
+   17033013254953527958, "Local", "CUDALink`NVCCCompiler`NVCCCompiler"},
+  "MessageTemplate2",
+  BaseStyle->"MSG"]], "Message",
+ CellChangeTimes->{3.990633356970134*^9},
+ CellLabel->
+  "During evaluation of \
+In[32]:=",ExpressionUUID->"f5e8d3ae-43d4-4a5f-8914-14c9025e6fdd"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"OpenCLQ", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.9906333833326693`*^9, 3.990633386304193*^9}},
+ CellLabel->"In[33]:=",ExpressionUUID->"3ac635ad-ed01-4943-bc23-129fa06b03f7"],
+
+Cell[BoxData["False"], "Output",
+ CellChangeTimes->{3.990633386834613*^9},
+ CellLabel->"Out[33]=",ExpressionUUID->"5d3e4239-e7ac-4976-93ad-c76ceb3a35ab"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "src", "=", "\"\<\n#define steps1 100\n#define steps2 100\n#define steps3 \
+300\n\n#define topmostbitsmask 0xE000000000000000\n\n__kernel void \
+search_matches(const ulong min,\n                             const ulong \
+max,\n                             __global ulong *matches,\n                 \
+            __global uint *match_count,\n                             const \
+ulong max_matches)\n{\n    size_t gid = get_global_id(0);\n    if (min + \
+(ulong)gid >= max) {\n        return;\n    }\n\n    \n    ulong n = min + \
+(ulong)gid;\n    int is_match = 1;\n\n    ulong o = 2 * n + 1;\n    ulong \
+o_orig = o;\n    \n    int count = 0;\n    while (o != 0 && count < steps1 && \
+((topmostbitsmask & o) == 0)) {\n        count++;\n        ulong a = o << 3;\n\
+        ulong b = o << 2;\n        ulong c = o << 1;\n        ulong d = o >> \
+1;\n        o = (a ^ b ^ c ^ d ^ o) ^ (a | b | c | d | o);\n    }\n\n    if \
+(o == 0) {return;}\n\n    while ((o & 1) == 0) {o = o >> 1;}\n\n    count = \
+0;\n    ulong accum = o;\n    ulong minim = o;\n\n    while (o != 0 && count \
+< steps3 && accum != 0 && ((topmostbitsmask & o) == 0)) {\n        count++;\n \
+       ulong a = o << 3;\n        ulong b = o << 2;\n        ulong c = o << \
+1;\n        ulong d = o >> 1;\n        o = (a ^ b ^ c ^ d ^ o) ^ (a | b | c | \
+d | o);\n\n        if (o != 0) { while ((o & 1) == 0) {o = o >> 1;} }\n       \
+ \n        accum = accum ^ o;\n        \n        if (o < minim) {minim = o;}\n\
+\n        if (count < steps2) {\n            minim = o;\n            accum = \
+o;\n        }\n    }\n\n    if (o == 0) {return;}\n\n\n    if (minim == 151 \
+|| minim == 221 || minim == 187 || minim == 189 || minim == 15903 || minim == \
+635) {\n        if (o_orig > minim) {\n            return;\n        }\n    }\n\
+\n    if (is_match) {\n        ulong idx = atomic_inc(match_count);\n        \
+if (idx < max_matches) {\n            matches[idx] = minim;\n        }\n    }\
+\n}\n\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.990633650029181*^9, 3.9906336645521*^9}},
+ CellID->795674769,ExpressionUUID->"b85390a7-685d-4176-ba07-2781b0fb364e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"addTwo", "=", 
+  RowBox[{"OpenCLFunctionLoad", "[", 
+   RowBox[{"src", ",", "\"\<addTwo_kernel\>\"", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", "_Integer", "}"}], ",", "_Integer"}], "}"}], ",", "16"}], 
+   "]"}]}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->240021644,ExpressionUUID->"37f8d95a-571c-43a5-9b54-5e0dcc7b4642"],
+
+Cell[BoxData[
+ RowBox[{"OpenCLFunction", "[", 
+  RowBox[{"\<\"<>\"\>", ",", "\<\"addTwo_kernel\"\>", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", "_Integer", "}"}], ",", "_Integer"}], "}"}]}], 
+  "]"}]], "Output",
+ CellLabel->"Out[3]=",
+ CellID->140072691,ExpressionUUID->"b5edb205-d915-4c81-a341-5c1db4599c54"]
+}, Open  ]]
+},
+WindowSize->{967.5, 582.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"8d42ef91-1645-4ef1-966c-259d48de2e29"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 223, 3, 29, "Input",ExpressionUUID->"e4037b0b-76fb-46be-a61a-8d080f11a791"],
+Cell[802, 27, 479, 12, 26, "Message",ExpressionUUID->"7ecf8330-c7c3-4178-b3e0-a6195bf102c4"],
+Cell[1284, 41, 506, 12, 26, "Message",ExpressionUUID->"0fbd1a25-cd4a-45b5-b381-b015f240bac0"],
+Cell[1793, 55, 513, 12, 26, "Message",ExpressionUUID->"82fd211e-ea84-4acb-8721-51525c229f03"],
+Cell[2309, 69, 468, 11, 26, "Message",ExpressionUUID->"5c3cf279-91dd-4d93-a72c-f70cb478b12c"],
+Cell[2780, 82, 452, 11, 26, "Message",ExpressionUUID->"5995cdd6-081b-4455-b19c-ed170d627d76"],
+Cell[3235, 95, 618, 14, 26, "Message",ExpressionUUID->"4c36f455-9fae-4d41-a004-8cbf7a715f6c"],
+Cell[3856, 111, 616, 14, 26, "Message",ExpressionUUID->"5ddf85fa-13cd-4185-80b1-3f9d6cfd4e59"],
+Cell[4475, 127, 745, 15, 45, "Message",ExpressionUUID->"f5e8d3ae-43d4-4a5f-8914-14c9025e6fdd"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5257, 147, 202, 3, 29, "Input",ExpressionUUID->"3ac635ad-ed01-4943-bc23-129fa06b03f7"],
+Cell[5462, 152, 153, 2, 33, "Output",ExpressionUUID->"5d3e4239-e7ac-4976-93ad-c76ceb3a35ab"]
+}, Open  ]],
+Cell[5630, 157, 2159, 30, 1612, "Input",ExpressionUUID->"b85390a7-685d-4176-ba07-2781b0fb364e",
+ CellID->795674769],
+Cell[CellGroupData[{
+Cell[7814, 191, 360, 9, 29, "Input",ExpressionUUID->"37f8d95a-571c-43a5-9b54-5e0dcc7b4642",
+ CellID->240021644],
+Cell[8177, 202, 320, 8, 33, "Output",ExpressionUUID->"b5edb205-d915-4c81-a341-5c1db4599c54",
+ CellID->140072691]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

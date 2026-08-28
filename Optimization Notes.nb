@@ -1,0 +1,134 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      4329,        126]
+NotebookOptionsPosition[      3760,        108]
+NotebookOutlinePosition[      4152,        124]
+CellTagsIndexPosition[      4109,        121]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"r", "=", 
+       RowBox[{"RandomInteger", "[", 
+        RowBox[{"1", ",", " ", "1000"}], "]"}]}], "}"}], ",", " ", 
+     RowBox[{"RepeatedTiming", "[", 
+      RowBox[{"CellularAutomaton", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"20", ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"2", ",", " ", "1"}], "}"}], ",", " ", "2"}], "}"}], ",", 
+        " ", 
+        RowBox[{"{", 
+         RowBox[{"r", ",", " ", "0"}], "}"}], ",", " ", "10000"}], "]"}], 
+      "]"}]}], "]"}], "//", "First"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"r", "=", 
+      RowBox[{"RandomInteger", "[", 
+       RowBox[{"2", "^", "1000"}], "]"}]}], "}"}], ",", " ", 
+    RowBox[{"RepeatedTiming", "[", 
+     RowBox[{"NestList", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"With", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"o", "=", 
+            RowBox[{"BitShiftRight", "[", 
+             RowBox[{"#", ",", " ", 
+              RowBox[{"IntegerExponent", "[", 
+               RowBox[{"#", ",", " ", "2"}], "]"}]}], "]"}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"a", "=", 
+             RowBox[{"BitShiftLeft", "[", 
+              RowBox[{"o", ",", " ", "3"}], "]"}]}], ",", " ", 
+            RowBox[{"b", "=", 
+             RowBox[{"BitShiftLeft", "[", 
+              RowBox[{"o", ",", " ", "2"}], "]"}]}], ",", " ", 
+            RowBox[{"c", "=", 
+             RowBox[{"BitShiftLeft", "[", 
+              RowBox[{"o", ",", " ", "1"}], "]"}]}], ",", " ", 
+            RowBox[{"d", "=", 
+             RowBox[{"BitShiftRight", "[", 
+              RowBox[{"o", ",", " ", "1"}], "]"}]}]}], "}"}], ",", 
+          "\[IndentingNewLine]", " ", 
+          RowBox[{"BitXor", "[", 
+           RowBox[{
+            RowBox[{"BitXor", "[", 
+             RowBox[{
+             "a", ",", " ", "b", ",", " ", "c", ",", " ", "d", ",", " ", 
+              "o"}], "]"}], ",", " ", 
+            RowBox[{"BitOr", "[", 
+             RowBox[{
+             "a", ",", " ", "b", ",", " ", "c", ",", " ", "d", ",", " ", 
+              "o"}], "]"}]}], "]"}]}], "\[IndentingNewLine]", "]"}], "&"}], ",",
+        " ", "r", ",", " ", "10000"}], "]"}], "]"}]}], "]"}], "//", 
+  "First"}]}], "Input",
+ CellChangeTimes->{{3.989916876745216*^9, 3.989916991022986*^9}, {
+  3.989917065891185*^9, 3.989917089772519*^9}, {3.989945069930769*^9, 
+  3.989945071527857*^9}},
+ CellLabel->
+  "In[285]:=",ExpressionUUID->"b4cf740d-fd86-45cb-96eb-37711a86e2ef"],
+
+Cell[BoxData["0.1751535`"], "Output",
+ CellChangeTimes->{{3.989917077691784*^9, 3.989917091015225*^9}, 
+   3.9899450734394083`*^9},
+ CellLabel->
+  "Out[285]=",ExpressionUUID->"acc30c5d-6430-412e-881d-d6e067dc0d49"],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellChangeTimes->{{3.989917077691784*^9, 3.989917091015225*^9}, 
+   3.989945091958047*^9},
+ CellLabel->
+  "Out[286]=",ExpressionUUID->"e8756d20-e1b3-427a-baeb-6583e655823e"]
+}, Open  ]]
+},
+WindowSize->{967.5, 582.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"e75dab68-6dbd-4957-89d9-8f8863b39f30"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 2738, 71, 162, "Input",ExpressionUUID->"b4cf740d-fd86-45cb-96eb-37711a86e2ef"],
+Cell[3317, 95, 214, 4, 33, "Output",ExpressionUUID->"acc30c5d-6430-412e-881d-d6e067dc0d49"],
+Cell[3534, 101, 210, 4, 33, "Output",ExpressionUUID->"e8756d20-e1b3-427a-baeb-6583e655823e"]
+}, Open  ]]
+}
+]
+*)
+

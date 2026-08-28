@@ -1,0 +1,59 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      1466,         49]
+NotebookOptionsPosition[      1031,         34]
+NotebookOutlinePosition[      1423,         50]
+CellTagsIndexPosition[      1380,         47]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Look at crypto algos, seeing if theres any programs to computationally reduce \
+them\
+\>", "Text",
+ CellChangeTimes->{{3.990026543371043*^9, 
+  3.9900265608768806`*^9}},ExpressionUUID->"1f4fe548-d4c7-4ec4-a572-\
+d53d3be20493"],
+
+Cell["Generalize to other rules with bitpacking", "Text",
+ CellChangeTimes->{{3.9900266290958557`*^9, 3.990026633941162*^9}, {
+  3.990026755439723*^9, 
+  3.990026757415306*^9}},ExpressionUUID->"bcf6b26e-1e1b-49de-91e6-\
+3a19a9d771b9"]
+},
+WindowSize->{967.5, 582.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"5d427206-7844-4e8d-957a-afb575fdf834"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 236, 6, 33, "Text",ExpressionUUID->"1f4fe548-d4c7-4ec4-a572-d53d3be20493"],
+Cell[793, 28, 234, 4, 33, "Text",ExpressionUUID->"bcf6b26e-1e1b-49de-91e6-3a19a9d771b9"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
